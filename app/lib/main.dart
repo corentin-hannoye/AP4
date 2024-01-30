@@ -9,11 +9,43 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+        appBar: AppBar(
+          title: Center(
+            child: Text(
+                'All4Sport',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold
+                ),
+            )
+          ),
+          backgroundColor: Colors.deepOrange,
         ),
+        body: const Column(
+          children: [
+            Text(
+                'Connexion',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),
+            ),
+            TextField(
+              autofocus: true,
+              decoration: InputDecoration(
+                labelText: 'Email'
+              ),
+            ),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Mot de passe'
+              ),
+            ),
+          ]
+        )
       ),
     );
   }
