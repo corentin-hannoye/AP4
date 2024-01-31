@@ -1,4 +1,4 @@
-# <div style="display: flex; align-items: center;">![Logo application de l'application All4Sport](/app/assets/images/logo_git.png) AP4 ALL4SPORT</div>
+# <div style="display: flex; align-items: center;">![Logo application de l'application All4Sport](/app/assets/images/logo_git.png "test") AP4 ALL4SPORT</div>
 
 > [!IMPORTANT]
 > [Lire la documentation d'utilisation](# "Lire la documentation d'utilisation")<br>
@@ -6,7 +6,7 @@
 > [Photos de l'app](# "Photos de l'app")
 > [!NOTE]
 > [app](/app "app") - contient l'architecture de l'application ALL4SPORT<br>
-> [important](/important "important") - contient les fichiers de création de l'application (mcd, maquette, ...)
+> [important](/important "important") - contient les fichiers de création, configuration, information de l'application (mcd, maquette, doc, images, ...)
 
 > [!WARNING]
 > | Outil  | Version |
