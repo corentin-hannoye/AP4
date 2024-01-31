@@ -1,9 +1,3 @@
-<style>
-    p {
-        color: red;
-    }
-</style>
-
 # <div style="display: flex; align-items: center;">![Logo application de l'application All4Sport](/app/assets/images/logo_git.png) AP4 ALL4SPORT</div>
 
 > [!IMPORTANT]
@@ -21,10 +15,15 @@
 > | Workbench | 8.0 |
 > | MySQL (InnoDB) | 8.0.31 |
 
-Left-
-| Header 1 | Header 2 |
-|:----|:----|   
-
-Center-
-| Header 1 | Header 2 |
-|:---:|:---:|  
+<table style="width: 100%; border: none;" cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td>1</td>
+    <td rowspan="3">2</td>
+  </tr>
+  <tr>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>4</td>
+  </tr>
+</table>
