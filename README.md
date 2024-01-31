@@ -1,3 +1,9 @@
+<style>
+    p {
+        color: red;
+    }
+</style>
+
 # <div style="display: flex; align-items: center;">![Logo application de l'application All4Sport](/app/assets/images/logo_git.png) AP4 ALL4SPORT</div>
 
 > [!IMPORTANT]
