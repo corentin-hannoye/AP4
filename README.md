@@ -7,7 +7,7 @@
 
 > [!NOTE]
 > [app](/app "app") - contient l'architecture de l'application ALL4SPORT<br>
-> [important](/important "important") - contient les fichiers de création de l'application (mcd, maquette, ...)
+> [important](/important "important") - contient les fichiers de création, information de l'application (mcd, maquette, doc, images, ...)
 
 > [!WARNING]
 > | Outil  | Version |
