@@ -1,3 +1,4 @@
+import 'package:app/pages/home/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -5,48 +6,15 @@ void main() {
 }
 
 class MainApp extends StatelessWidget {
+
   const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
+      title: 'All4Sport',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Center(
-            child: Text(
-                'All4Sport',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold
-                ),
-            )
-          ),
-          backgroundColor: Colors.deepOrange,
-        ),
-        body: const Column(
-          children: [
-            Text(
-                'Connexion',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-                ),
-            ),
-            TextField(
-              autofocus: true,
-              decoration: InputDecoration(
-                labelText: 'Email'
-              ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Mot de passe'
-              ),
-            ),
-          ]
-        )
-      ),
+      home: HomePage()
     );
   }
 }
