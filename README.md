@@ -1,6 +1,6 @@
 # <div align="center">AP4 ALL4SPORT</div>
 
-![Logo application de l'application All4Sport](/app/assets/images/logo.png)
+![Logo application de l'application All4Sport](/app/assets/images/logo_git.png)
 
 > [!IMPORTANT]
 > [Lire la documentation d'utilisation](# "Lire la documentation d'utilisation")<br>
