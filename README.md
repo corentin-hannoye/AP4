@@ -20,3 +20,11 @@
 > | ------------- | ------------- |
 > | Workbench | 8.0 |
 > | MySQL (InnoDB) | 8.0.31 |
+
+Left-
+| Header 1 | Header 2 |
+|:----|:----|   
+
+Center-
+| Header 1 | Header 2 |
+|:---:|:---:|  
