@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -20,26 +22,37 @@ class HomePage extends StatelessWidget {
           ),
           backgroundColor: const Color(0xfff7882d),
         ),
-        body: const Column(
+        body: Column(
           children: [
-            Text(
+            const Text(
               'Connexion',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold
               ),
             ),
-            TextField(
-              autofocus: true,
-              decoration: InputDecoration(
-                labelText: 'Email'
+            Container(
+              padding: const EdgeInsetsDirectional.only(
+                start: 20,
+                end: 20
               ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Mot de passe'
-              ),
-            ),
+              child: const Column(
+                children: [
+                  TextField(
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      labelText: 'Email'
+                    ),
+                  ),
+                  TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Mot de passe'
+                    ),
+                  )
+                ]
+              )
+            )
           ]
         )
       )
