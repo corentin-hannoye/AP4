@@ -1,4 +1,6 @@
-<div align="center">AP4 ALL4SPORT</div>
+# <div align="center">AP4 ALL4SPORT</div>
+
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](/important/test.svg)
 
 > [!IMPORTANT]
 > [Lire la documentation d'utilisation](# "Lire la documentation d'utilisation")<br>
