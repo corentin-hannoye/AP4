@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -49,6 +48,17 @@ class HomePage extends StatelessWidget {
                     decoration: InputDecoration(
                       labelText: 'Mot de passe'
                     ),
+                  ),
+                  TextButton(
+                      onPressed: null,
+                      child: Text(
+                          'Se connecter',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold
+                          ),
+                      )
                   )
                 ]
               )
