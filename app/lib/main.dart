@@ -6,15 +6,11 @@ void main() {
 }
 
 class MainApp extends StatelessWidget {
-
   const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'All4Sport',
-      debugShowCheckedModeBanner: false,
-      home: HomePage()
-    );
+        title: 'A4S', debugShowCheckedModeBanner: false, home: HomePage());
   }
 }

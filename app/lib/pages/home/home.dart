@@ -13,7 +13,11 @@ Future fetchUser() async {
       await http.get(Uri.parse('${_baseUrl}$service/$entity/$elementID'));
 
   if (response.statusCode == 200) {
-    print(jsonDecode(response.body));
+    // print(jsonDecode(response.body));
+    Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+    String userName = jsonResponse['name'];
+    print(jsonResponse);
+    print(userName);
   } else {
     throw Exception('Erreur du serveur');
   }
