@@ -3,28 +3,32 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-String _baseUrl = "http://192.168.107.13:8000/";
-String service = "api";
-String entity = "users";
-String elementID = "1";
+String _baseUrl = "http://192.168.1.45:8000/";
+
 
 Future fetchUser() async {
-  final response =
-      await http.get(Uri.parse('${_baseUrl}$service/$entity/$elementID'));
+  var headers = {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  };
+  var request = http.Request('POST', Uri.parse('${_baseUrl}api/login'));
+  request.bodyFields = {
+    'email': 'user2@gmail.com',
+    'password': 'user2'
+  };
+  request.headers.addAll(headers);
+
+  http.StreamedResponse response = await request.send();
 
   if (response.statusCode == 200) {
-    // print(jsonDecode(response.body));
-    Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-    String userName = jsonResponse['name'];
-    print(jsonResponse);
-    print(userName);
-  } else {
-    throw Exception('Erreur du serveur');
+    print(await response.stream.bytesToString());
+  }
+  else {
+    print(response.reasonPhrase);
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
