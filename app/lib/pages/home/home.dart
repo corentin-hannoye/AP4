@@ -1,7 +1,23 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-bool login() {
-  return true;
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+String _baseUrl = "http://192.168.107.13:8000/";
+Future fetchUser() async {
+
+  final response = await http.get(Uri.parse('${_baseUrl}api/users/1'));
+
+  if(response.statusCode == 200) {
+
+    print(jsonDecode(response.body));
+
+  } else {
+
+    throw Exception('Erreur du serveur');
+
+  }
+
 }
 
 class HomePage extends StatelessWidget {
@@ -82,7 +98,7 @@ class HomePage extends StatelessWidget {
                         height: 20,
                       ),
                       ElevatedButton(
-                        onPressed: login,
+                        onPressed: fetchUser,
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
                           side: const BorderSide(
