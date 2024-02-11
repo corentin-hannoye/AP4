@@ -14,3 +14,13 @@
 > | ------------- | ------------- |
 > | Workbench | 8.0 |
 > | MySQL (InnoDB) | 8.0.31 |
+
+Bonnes pratiques :
+
+- Nommage des branches : Veuillez nommer vos branches de la sorte (nom-pageQueTuTraites-ceQueTuFaisDessus).
+- Nommage des variables : Veuillez respecter la norme du camelCase.
+- Nommage des variables : Veuillez être le plus clair et précis possible dans le nommage (la longueur n'est pas un problème).
+- Nommage des fonctions : Veuillez être le plus clair et précis possible dans le nommage (la longueur n'est pas un problème).
+- Maintenabilité du code : Modularisez au maximum le code écrit et le factorisez avant tout push/merge.
+- Compréhension du code : Ne pas hésiter à insérer des commentaires.
+- Cohésion : Prévenir l'équipe avant et après chaque push/merge.
