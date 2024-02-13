@@ -1,7 +1,10 @@
-import 'package:app/pages/login/login.dart';
+import 'package:app/pages/login/LoginPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load();
+
   runApp(const MainApp());
 }
 
@@ -11,6 +14,9 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-        title: 'A4S', debugShowCheckedModeBanner: false, home: LoginPage());
+        title: 'A4S',
+        debugShowCheckedModeBanner: false,
+        home: LoginPage()
+    );
   }
 }

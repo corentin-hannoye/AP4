@@ -1,9 +1,0 @@
-class Styles {
-
-  static submitButtonStyle() {
-
-
-
-  }
-
-}
