@@ -13,7 +13,7 @@ class _LoaderPageState extends State<LoaderPage> with SingleTickerProviderStateM
 
   @override
   dispose() {
-    _controller.dispose(); // you need this
+    _controller.dispose();
     super.dispose();
   }
 
