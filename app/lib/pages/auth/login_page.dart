@@ -171,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       child: const Text(
-                        'Se connecter'
+                        'Connexion'
                       )
                     ),
                   ]),
