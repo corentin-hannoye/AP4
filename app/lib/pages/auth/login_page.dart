@@ -1,13 +1,14 @@
 import 'dart:convert';
 
+import 'package:app/model/user_model.dart';
 import 'package:app/pages/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
-  final Function connected;
-  const LoginPage(this.connected, {super.key});
+  final Function toggleConnected;
+  const LoginPage(this.toggleConnected, {super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -22,11 +23,12 @@ class _LoginPageState extends State<LoginPage> {
   bool hidePassword = true;
   String err = '';
 
-  Future login() async {
+  Future<void> login() async {
     setState(() {
       loading = true;
       err = '';
     });
+    // Début requête http sur 'http://localhost:8000/api/login'
     final http.Response response = await http.post(
       Uri.parse('${apiUrl!}login'),
       headers: <String, String>{
@@ -37,26 +39,34 @@ class _LoginPageState extends State<LoginPage> {
         'password': password.text
       }
     );
+    // Fin requête http sur 'http://localhost:8000/api/login'
 
     setState(() {
       loading = false;
     });
 
-    if(response.statusCode == 200) {
-
-      final dynamic responseJson = jsonDecode(response.body);
-      final bool success = responseJson['success'];
-
-      setState(() {
-        if(success) {
-          err = 'Identifiant correct, bienvenue ${responseJson['user']['firstname']} ${responseJson['user']['name']} !';
-          widget.connected();
-        } else {
-          err = 'Identifiant incorrect !';
-        }
-      });
-
+    // Début si la réponse ne nous retourne pas un code 200 (OK)
+    if(response.statusCode != 200) {
+      return;
     }
+    // Fin si la réponse ne nous retourne pas un code 200 (OK)
+
+    final dynamic responseJson = jsonDecode(response.body);
+    final bool success = responseJson['success'];
+
+    // Début si la connexion n'est pas un succès (couple email/mdp invalide)
+    if(!success) {
+      setState(() {
+        err = 'Identifiant incorrect !';
+      });
+      return;
+    }
+    // Fin si la connexion n'est pas un succès (couple email/mdp invalide)
+
+    // Si tout se passe bien, nous appelons la function toggleConnected() dans main.dart, et ensuite nous sauvegardons la session de l'utilisateur
+    UserModel user = UserModel.fromJson(responseJson['user']);
+    user.saveUser();
+    widget.toggleConnected();
 
   }
 

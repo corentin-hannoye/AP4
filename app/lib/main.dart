@@ -1,6 +1,6 @@
 import 'package:app/pages/auth/login_page.dart';
-import 'package:app/pages/home/home.dart';
-import 'package:app/pages/profil/profil.dart';
+import 'package:app/pages/home/home_page.dart';
+import 'package:app/pages/profil/profil_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -34,9 +34,9 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  void connected() {
+  void toggleConnected() {
     setState(() {
-      isConnected = true;
+      isConnected = !isConnected;
     });
   }
 
@@ -113,11 +113,11 @@ class _MainAppState extends State<MainApp> {
         child: Scaffold(
           appBar: (isConnected ? appTopBar() : null),
           body: isConnected ?
-            const [
+            [
               HomePage(),
-              ProfilPage()
+              ProfilPage(toggleConnected)
             ][_selectedIndex] :
-            LoginPage(connected),
+            LoginPage(toggleConnected),
           bottomNavigationBar: (isConnected ? appBottomNavigationBar() : null)
         )
       )
