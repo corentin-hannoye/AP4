@@ -9,7 +9,7 @@ class LoaderPage extends StatefulWidget {
 }
 
 class _LoaderPageState extends State<LoaderPage> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(vsync: this, duration: Duration(seconds: 2))..repeat();
+  late final AnimationController _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2))..repeat();
 
   @override
   dispose() {
@@ -27,8 +27,9 @@ class _LoaderPageState extends State<LoaderPage> with SingleTickerProviderStateM
         child: AnimatedBuilder(
           animation: _controller,
           builder: (_, child) {
-            return Transform.rotate(
-              angle: _controller.value * 2 * math.pi,
+            return Transform(
+              transform: Matrix4.rotationY(_controller.value * 2 * math.pi),
+              alignment: Alignment.center,
               child: child,
             );
           },
@@ -41,4 +42,3 @@ class _LoaderPageState extends State<LoaderPage> with SingleTickerProviderStateM
     );
   }
 }
-
