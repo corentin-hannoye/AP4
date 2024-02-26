@@ -72,8 +72,8 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                entry.key.getName,
-                style: Theme.of(context).textTheme.displayLarge
+                entry.key.getName.toString().toUpperCase(),
+                style: Theme.of(context).textTheme.displayLarge,
               ),
               const SizedBox(height: 10),
               AutoHeightGridView(
@@ -109,6 +109,7 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(height: 20),
                         Text(
                           entry.value[i].getName.toString(),
+                          textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
@@ -123,9 +124,27 @@ class _HomePageState extends State<HomePage> {
                             vertical: 5
                           ),
                           child: Text(
-                            textAlign: TextAlign.center,
                             entry.value[i].getUnitPrice.toString(),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
                           ),
+                        ),
+                        const SizedBox(height: 5),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary,
+                            borderRadius: const BorderRadius.all(Radius.circular(4))
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 5
+                          ),
+                          child: const Icon(
+                            Icons.add_shopping_cart,
+                            color: Color(0xff888888)
+                          )
                         )
                       ],
                     )

@@ -12,7 +12,7 @@ class CategoryModel {
 
   }
 
-  get getName {
+  String? get getName {
     return name;
   }
 

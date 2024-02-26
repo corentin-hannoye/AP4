@@ -30,7 +30,7 @@ class UserModel {
     return session;
   }
 
-  get getName {
+  String? get getName {
     return name;
   }
 

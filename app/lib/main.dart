@@ -78,7 +78,12 @@ class _MainAppState extends State<MainApp> {
           icon: Icon(Icons.account_circle_outlined),
           activeIcon: Icon(Icons.account_circle),
           label: ''
-        )
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_cart_outlined),
+          activeIcon: Icon(Icons.shopping_cart),
+          label: ''
+        ),
       ],
       iconSize: 30,
       showSelectedLabels: false,
@@ -115,7 +120,8 @@ class _MainAppState extends State<MainApp> {
           body: isConnected ?
             [
               HomePage(),
-              ProfilPage(toggleConnected)
+              ProfilPage(toggleConnected),
+              null
             ][_selectedIndex] :
             LoginPage(toggleConnected),
           bottomNavigationBar: (isConnected ? appBottomNavigationBar() : null)
