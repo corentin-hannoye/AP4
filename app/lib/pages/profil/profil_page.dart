@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ProfilPage extends StatefulWidget {
   final Function toggleConnected;
-  const ProfilPage(this.toggleConnected, {super.key});
+  const ProfilPage({required this.toggleConnected, super.key});
 
   @override
   State<ProfilPage> createState() => _ProfilPageState();
@@ -18,10 +18,13 @@ class _ProfilPageState extends State<ProfilPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Page de profil ${user?.getName}"),
+          Text('Page de profil ${user?.getName}'),
           TextButton(
               onPressed: () => widget.toggleConnected(),
-              child: const Text('Déconnexion')
+              child: Text(
+                'Déconnexion',
+                style: Theme.of(context).textTheme.bodyMedium,
+              )
           )
         ],
       ),

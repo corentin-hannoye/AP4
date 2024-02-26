@@ -28,11 +28,11 @@ class ProductModel {
     slug = json['slug'];
     category = CategoryModel.fromJson(json['category']);
 
-    List<String> _images = <String>[];
+    List<String> images = <String>[];
     for(var i = 0; i < json['productImgs'].length; i++) {
-      _images.add(json['productImgs'][i]['name']);
+      images.add(json['productImgs'][i]['name']);
     }
-    images = _images;
+    this.images = images;
 
   }
 

@@ -2,6 +2,7 @@ import 'package:app/pages/auth/login_page.dart';
 import 'package:app/pages/home/home_page.dart';
 import 'package:app/pages/profil/profil_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
@@ -15,6 +16,7 @@ const SECONDARY_COLOR = Color(0xfff7882d);
 const WHITE_COLOR = Color(0xffffffff);
 const SUCCESS_COLOR = Color(0xff3fbf4f);
 const ERROR_COLOR = Color(0xffe84f4f);
+const LINK_COLOR = Color(0xff3b82f6);
 const DISABLED_COLOR = Color(0xff505050);
 
 class MainApp extends StatefulWidget {
@@ -26,7 +28,7 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   int _selectedIndex = 0;
-  bool isConnected = false;
+  bool isConnected = true;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -38,6 +40,51 @@ class _MainAppState extends State<MainApp> {
     setState(() {
       isConnected = !isConnected;
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'A4S',
+      debugShowCheckedModeBanner: false,
+      theme: appThemeData(),
+      home: SafeArea(
+        child: Scaffold(
+          appBar: (isConnected ? appTopBar() : null),
+          body: isConnected ?
+            [
+              const HomePage(),
+              ProfilPage(toggleConnected: toggleConnected),
+              null
+            ][_selectedIndex] :
+            LoginPage(toggleConnected: toggleConnected),
+          bottomNavigationBar: (isConnected ? appBottomNavigationBar() : null)
+        )
+      )
+    );
+  }
+
+  AppBar appTopBar() {
+    return AppBar(
+      title: Image.asset(
+        'assets/images/logo.png',
+        width: 50
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            print('QR CODE...');
+          },
+          child: const Icon(
+            Icons.qr_code_scanner,
+            color: WHITE_COLOR
+          )
+        )
+      ],
+      scrolledUnderElevation: 0,
+      backgroundColor: PRIMARY_COLOR,
+      centerTitle: true,
+    );
   }
 
   ThemeData appThemeData() {
@@ -54,13 +101,29 @@ class _MainAppState extends State<MainApp> {
       textTheme: const TextTheme(
         displayLarge: TextStyle(
           fontSize: 30,
-          fontWeight: FontWeight.bold
+          fontWeight: FontWeight.w900
+        ),
+        displayMedium: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.normal
         ),
         bodyLarge: TextStyle(
           fontSize: 16,
+          fontWeight: FontWeight.w900
+        ),
+        bodyMedium: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.normal
         ),
         labelLarge: TextStyle(
           fontSize: 16,
+          fontWeight: FontWeight.w900
+        ),
+        labelSmall: TextStyle(
+          fontSize: 16,
+          decoration: TextDecoration.underline,
+          decorationColor: LINK_COLOR,
+          color: LINK_COLOR
         )
       )
     );
@@ -93,40 +156,6 @@ class _MainAppState extends State<MainApp> {
       selectedItemColor: PRIMARY_COLOR,
       unselectedItemColor: DISABLED_COLOR,
       onTap: _onItemTapped
-    );
-  }
-
-  AppBar appTopBar() {
-    return AppBar(
-      title: Image.asset(
-        'assets/images/logo.png',
-        width: 50
-      ),
-      backgroundColor: SECONDARY_COLOR,
-      centerTitle: true,
-      toolbarHeight: 60
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'A4S',
-      debugShowCheckedModeBanner: false,
-      theme: appThemeData(),
-      home: SafeArea(
-        child: Scaffold(
-          appBar: (isConnected ? appTopBar() : null),
-          body: isConnected ?
-            [
-              HomePage(),
-              ProfilPage(toggleConnected),
-              null
-            ][_selectedIndex] :
-            LoginPage(toggleConnected),
-          bottomNavigationBar: (isConnected ? appBottomNavigationBar() : null)
-        )
-      )
     );
   }
 }
