@@ -121,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: const BorderRadius.all(Radius.circular(4))
                           ),
                           padding: const EdgeInsets.symmetric(
-                            vertical: 5
+                            vertical: 8
                           ),
                           child: Text(
                             entry.value[i].getUnitPrice.toString(),
@@ -132,19 +132,25 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         const SizedBox(height: 5),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primary,
-                            borderRadius: const BorderRadius.all(Radius.circular(4))
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Theme.of(context).colorScheme.primary,
+                            fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(4)),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 8
+                            ),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 5
-                          ),
+                          onPressed: () {
+                            print('Produit ${int.parse(entry.value[i].getId.toString())} ajouté au panier');
+                          },
                           child: const Icon(
                             Icons.add_shopping_cart,
                             color: Color(0xff888888)
-                          )
+                          ),
                         )
                       ],
                     )
