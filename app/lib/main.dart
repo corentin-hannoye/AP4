@@ -26,14 +26,7 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  int _selectedIndex = 0;
   bool isConnected = false;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   void toggleConnected() {
     setState(() {
@@ -41,6 +34,7 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
+  // Template
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,21 +42,33 @@ class _MainAppState extends State<MainApp> {
       debugShowCheckedModeBanner: false,
       theme: appThemeData(),
       home: SafeArea(
-        child: Scaffold(
-          appBar: (isConnected ? appTopBar() : null),
-          body: isConnected ?
-            [
-              const HomePage(),
-              ProfilPage(toggleConnected: toggleConnected),
-              null
-            ][_selectedIndex] :
-            LoginPage(toggleConnected: toggleConnected),
-          bottomNavigationBar: (isConnected ? appBottomNavigationBar() : null)
+        child: DefaultTabController(
+          length: 3,
+          child: Scaffold(
+            appBar: (isConnected ? appTopBar() : null),
+            body: getScreens(),
+            bottomNavigationBar: (isConnected ? appBottomNavigationBar() : null),
+          ),
         )
       )
     );
   }
 
+  getScreens() {
+    if(!isConnected) {
+      return LoginPage(toggleConnected: toggleConnected);
+    }
+
+    return TabBarView(
+      children: [
+        HomePage(),
+        ProfilPage(toggleConnected: toggleConnected),
+        Text('Mon panier')
+      ],
+    );
+  }
+
+  // AppBar
   AppBar appTopBar() {
     return AppBar(
       title: Image.asset(
@@ -86,36 +92,34 @@ class _MainAppState extends State<MainApp> {
     );
   }
 
-  BottomNavigationBar appBottomNavigationBar() {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
-          activeIcon: Icon(Icons.home),
-          label: '',
+  // BottomBar
+  Widget appBottomNavigationBar() {
+    return Container(
+      color: SECONDARY_COLOR,
+      child: const TabBar(
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.white70,
+        indicatorSize: TabBarIndicatorSize.label,
+        dividerHeight: 0,
+        indicatorPadding: EdgeInsets.symmetric(
+          vertical: 5,
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle_outlined),
-          activeIcon: Icon(Icons.account_circle),
-          label: ''
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart_outlined),
-          activeIcon: Icon(Icons.shopping_cart),
-          label: ''
-        ),
-      ],
-      iconSize: 30,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      currentIndex: _selectedIndex,
-      backgroundColor: SECONDARY_COLOR,
-      selectedItemColor: PRIMARY_COLOR,
-      unselectedItemColor: DISABLED_COLOR,
-      onTap: _onItemTapped
+        tabs: <Tab>[
+          Tab(
+            icon: Icon(Icons.home_rounded),
+          ),
+          Tab(
+            icon: Icon(Icons.account_circle),
+          ),
+          Tab(
+            icon: Icon(Icons.shopping_cart),
+          ),
+        ],
+      ),
     );
   }
 
+  // ThemeApp
   ThemeData appThemeData() {
     return ThemeData(
       fontFamily: 'Montserrat',
