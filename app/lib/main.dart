@@ -2,7 +2,6 @@ import 'package:app/pages/auth/login_page.dart';
 import 'package:app/pages/home/home_page.dart';
 import 'package:app/pages/profil/profil_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
@@ -28,7 +27,7 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   int _selectedIndex = 0;
-  bool isConnected = true;
+  bool isConnected = false;
 
   void _onItemTapped(int index) {
     setState(() {
