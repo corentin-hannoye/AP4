@@ -18,13 +18,13 @@ class _ProfilPageState extends State<ProfilPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Page de profil ${user?.getName}'),
+          Text("Page de profil de l'utilisateur ${user?.getName}"),
           TextButton(
-              onPressed: () => widget.toggleConnected(),
-              child: Text(
-                'Déconnexion',
-                style: Theme.of(context).textTheme.bodyMedium,
-              )
+            onPressed: () => widget.toggleConnected(),
+            child: Text(
+              'Déconnexion',
+              style: Theme.of(context).textTheme.bodyMedium,
+            )
           )
         ],
       ),
