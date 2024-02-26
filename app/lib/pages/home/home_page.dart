@@ -143,7 +143,22 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         ClipRRect(
                           borderRadius: const BorderRadius.all(Radius.circular(4)),
-                          child: Image.network('$apiUrl/media/images/product/${entry.value[i].getId}/${entry.value[i].getImages?[0]}'),
+                          child: Image.network(
+                            '$apiUrl/media/images/product/${entry.value[i].getId}/${entry.value[i].getImages?[0]}',
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if(loadingProgress == null) {
+                                return child;
+                              }
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                      : null,
+                                ),
+                              );
+                            }
+                          ),
                         ),
                         Container(
                           margin: const EdgeInsets.symmetric(

@@ -86,6 +86,36 @@ class _MainAppState extends State<MainApp> {
     );
   }
 
+  BottomNavigationBar appBottomNavigationBar() {
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home_outlined),
+          activeIcon: Icon(Icons.home),
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_circle_outlined),
+          activeIcon: Icon(Icons.account_circle),
+          label: ''
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_cart_outlined),
+          activeIcon: Icon(Icons.shopping_cart),
+          label: ''
+        ),
+      ],
+      iconSize: 30,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      currentIndex: _selectedIndex,
+      backgroundColor: SECONDARY_COLOR,
+      selectedItemColor: PRIMARY_COLOR,
+      unselectedItemColor: DISABLED_COLOR,
+      onTap: _onItemTapped
+    );
+  }
+
   ThemeData appThemeData() {
     return ThemeData(
       fontFamily: 'Montserrat',
@@ -125,36 +155,6 @@ class _MainAppState extends State<MainApp> {
           color: LINK_COLOR
         )
       )
-    );
-  }
-
-  BottomNavigationBar appBottomNavigationBar() {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
-          activeIcon: Icon(Icons.home),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle_outlined),
-          activeIcon: Icon(Icons.account_circle),
-          label: ''
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart_outlined),
-          activeIcon: Icon(Icons.shopping_cart),
-          label: ''
-        ),
-      ],
-      iconSize: 30,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      currentIndex: _selectedIndex,
-      backgroundColor: SECONDARY_COLOR,
-      selectedItemColor: PRIMARY_COLOR,
-      unselectedItemColor: DISABLED_COLOR,
-      onTap: _onItemTapped
     );
   }
 }
