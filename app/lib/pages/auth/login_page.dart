@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
     });
     // Début requête http sur 'http://localhost:8000/api/login'
     final http.Response response = await http.post(
-      Uri.parse('${apiUrl!}login'),
+      Uri.parse('$apiUrl/api/login'),
       headers: <String, String>{
         'Content-Type': 'application/x-www-form-urlencoded',
       },

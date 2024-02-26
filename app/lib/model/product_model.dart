@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import 'category_model.dart';
 
 class ProductModel {
@@ -5,31 +7,53 @@ class ProductModel {
   String? id;
   String? name;
   String? description;
-  int? unitPrice;
+  String? unitPrice;
   int? weight;
   String? slug;
   CategoryModel? category;
+  List<String>? images;
 
-  ProductModel(this.id, this.name, this.description, this.unitPrice, this.weight, this.slug, this.category);
+  ProductModel(this.id, this.name, this.description, this.unitPrice, this.weight, this.slug, this.category, this.images);
 
   ProductModel.fromJson(Map json) {
 
     id = json['id'];
     name = json['name'];
     description = json['description'];
-    unitPrice = json['unitPrice'];
+    unitPrice = NumberFormat.currency(
+      locale: 'fr_FR',
+      symbol: '€'
+    ).format(json['unit_price']);
     weight = json['weight'];
     slug = json['slug'];
     category = CategoryModel.fromJson(json['category']);
 
+    List<String> _images = <String>[];
+    for(var i = 0; i < json['productImgs'].length; i++) {
+      _images.add(json['productImgs'][i]['name']);
+    }
+    images = _images;
+
   }
 
-  get getName {
+  String? get getId {
+    return id;
+  }
+
+  String? get getName {
     return name;
   }
 
-  get getCategory {
+  String? get getUnitPrice {
+    return unitPrice;
+  }
+
+  CategoryModel? get getCategory {
     return category;
+  }
+
+  List<String>? get getImages {
+    return images;
   }
 
 }
