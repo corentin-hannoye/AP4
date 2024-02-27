@@ -16,11 +16,9 @@
 > | Google Chrome | 116.0.5845.180 |
 > | Git | 2.43.0 |
 > | [Java - JDK](https://www.oracle.com/fr/java/technologies/downloads/ "Java - JDK") - JDK | 21.0.2 |
-> | [Gradle](https://docs.gradle.org/current/userguide/compatibility.html "Gradle") | 8.5 |
+> | [Gradle](https://docs.gradle.org/current/userguide/compatibility.html "Gradle"){:target="_blank"} | 8.5 |
 > | Workbench | 8.0 |
 > | MySQL (InnoDB) | 8.0 |
-
-<a href="https://google.com" target="_blank">a</a>
 
 Bonnes pratiques :
 
