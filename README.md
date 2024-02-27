@@ -1,26 +1,26 @@
 # <div align="center">![Logo application de l'application All4Sport](/app/assets/images/logo_git.png) AP4 ALL4SPORT</div>
 
-> [!IMPORTANT]
-> [Lire la documentation d'utilisation](# "Lire la documentation d'utilisation")<br>
-> [Qui A Fait Quoi ?](# "Qui A Fait Quoi ?")<br>
+> [!IMPORTANT]  
+> [Lire la documentation d'utilisation](# "Lire la documentation d'utilisation")  
+> [Qui A Fait Quoi ?](# "Qui A Fait Quoi ?")  
 > [Photos de l'app](# "Photos de l'app")
 
-> [!NOTE]
-> [app](/app "app") - contient l'architecture de l'application ALL4SPORT<br>
+> [!NOTE]  
+> [app](/app "app") - contient l'architecture de l'application ALL4SPORT  
 > [important](/important "important") - contient les fichiers de création, information de l'application (mcd, maquette, doc, images, ...)
 
-> [!WARNING]
+> [!WARNING]  
 > | Outil  | Version |
 > | ------------- | ------------- |
 > | Visual Studio Code | 1.82.0 |
 > | Google Chrome | 116.0.5845.180 |
 > | Git | 2.43.0 |
-> | [Java - JDK](https://www.oracle.com/fr/java/technologies/downloads/ "Java - JDK") - JDK | 21.0.2 |
-> | [Gradle](https://docs.gradle.org/current/userguide/compatibility.html "Gradle"){:target="_blank" rel="noopener"} | 8.5 |
+> | [Java - JDK](https://www.oracle.com/fr/java/technologies/downloads/ "Java - JDK") | 21.0.2 |
+> | [Gradle](https://docs.gradle.org/current/userguide/compatibility.html "Gradle") | 8.5 |
 > | Workbench | 8.0 |
 > | MySQL (InnoDB) | 8.0 |
 
-Bonnes pratiques :
+## Bonnes pratiques
 
 - Nommage des branches : Veuillez nommer vos branches de la sorte (nom-pageQueTuTraites-ceQueTuFaisDessus).
 - Nommage des variables : Veuillez respecter la norme du camelCase.
