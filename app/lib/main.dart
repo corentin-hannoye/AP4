@@ -41,8 +41,7 @@ class _MainAppState extends State<MainApp> {
       title: 'A4S',
       debugShowCheckedModeBanner: false,
       theme: appThemeData(),
-      home: SafeArea(
-        child: DefaultTabController(
+      home: DefaultTabController(
           length: 3,
           child: Scaffold(
             appBar: (isConnected ? appTopBar() : null),
@@ -50,7 +49,6 @@ class _MainAppState extends State<MainApp> {
             bottomNavigationBar: (isConnected ? appBottomNavigationBar() : null),
           ),
         )
-      )
     );
   }
 
