@@ -17,6 +17,7 @@
 > | [Git](https://git-scm.com/downloads "Git") | 2.43.0 |
 > | [Flutter](https://docs.flutter.dev/get-started/install "Flutter") | 3.19.1 |
 > | [Dart](https://dart.dev/get-dart "Dart") | 3.3.0 |
+> | [Android / API](https://apilevels.com/#main-table "Android / API") | 8 / 27 (> 90%) |
 > | [Java - JDK](https://www.oracle.com/fr/java/technologies/downloads/#java21 "Java - JDK") | 21.0.2 |
 > | [Gradle](https://docs.gradle.org/current/userguide/compatibility.html#java "Gradle") | 8.5 |
 > | [Workbench](https://dev.mysql.com/downloads/installer/ "Workbench") | 8.0 |
