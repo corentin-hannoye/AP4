@@ -9,11 +9,9 @@
 > [app](/app "app") - contient l'architecture de l'application ALL4SPORT  
 > [important](/important "important") - contient les fichiers de création, informations de l'application (mcd, maquette, doc, images, ...)
 
-> [!WARNING]  
+> [!TIP]  
 > | Outil  | Version |
 > | ------------- | ------------- |
-> | [Visual Studio Code](https://code.visualstudio.com/Download "Visual Studio Code") | 1.82.0 |
-> | [Google Chrome](https://www.google.com/intl/fr_fr/chrome/ "Google Chrome") | 116.0.5845.180 |
 > | [Git](https://git-scm.com/downloads "Git") | 2.43.0 |
 > | [Flutter](https://docs.flutter.dev/get-started/install "Flutter") | 3.19.1 |
 > | [Dart](https://dart.dev/get-dart "Dart") | 3.3.0 |
