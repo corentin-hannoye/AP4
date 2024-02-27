@@ -15,7 +15,7 @@
 > | Visual Studio Code | 1.82.0 |
 > | Google Chrome | 116.0.5845.180 |
 > | Git | 2.43.0 |
-> | (https://www.oracle.com/fr/java/technologies/downloads/ "Java") - JDK | 21.0.2 |
+> | [a](https://www.oracle.com/fr/java/technologies/downloads/ "Java") - JDK | 21.0.2 |
 > | Gradle | 8.5 |
 > | Workbench | 8.0 |
 > | MySQL (InnoDB) | 8.0 |
