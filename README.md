@@ -5,7 +5,7 @@
 > [Qui A Fait Quoi ?](# "Qui A Fait Quoi ?")  
 > [Photos de l'app](# "Photos de l'app")
 
-> [!NOTE]  
+> [!NOTE]
 > [app](/app "app") - contient l'architecture de l'application ALL4SPORT  
 > [important](/important "important") - contient les fichiers de création, information de l'application (mcd, maquette, doc, images, ...)
 
