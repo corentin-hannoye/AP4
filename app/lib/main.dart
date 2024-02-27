@@ -61,9 +61,9 @@ class _MainAppState extends State<MainApp> {
 
     return TabBarView(
       children: [
-        HomePage(),
+        const HomePage(),
         ProfilPage(toggleConnected: toggleConnected),
-        Text('Mon panier')
+        const Text('Mon panier')
       ],
     );
   }
