@@ -12,7 +12,7 @@
 > [!TIP]  
 > | Outil  | Version |
 > | ------------- | ------------- |
-> | [Git](https://git-scm.com/downloads "Git") | 2.43.0 |
+> | [Git](https://git-scm.com/downloads "Git") | 2.44.0 |
 > | [Flutter](https://docs.flutter.dev/get-started/install "Flutter") | 3.19.1 |
 > | [Dart](https://dart.dev/get-dart "Dart") | 3.3.0 |
 > | [Android / API](https://apilevels.com/#main-table "Android / API") | 8 / 27 (> 90%) |
