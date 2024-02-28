@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:app/model/category_model.dart';
-import 'package:app/model/product_model.dart';
-import 'package:app/model/user_model.dart';
+import 'package:app/src/entity/category.dart';
+import 'package:app/src/entity/product.dart';
+import 'package:app/src/entity/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -20,9 +20,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final String? apiUrl = dotenv.env['API_URL'];
   // Tous les produits avec leur catégorie respective
-  final Map<CategoryModel, List<ProductModel>> categoriesProducts = {};
+  final Map<Category, List<Product>> categoriesProducts = {};
   // Toutes les catégories avec leur nombre de produit actuellement afficher à l'écran
-  final Map<CategoryModel, int> categoriesNbProductsDisplayed = {};
+  final Map<Category, int> categoriesNbProductsDisplayed = {};
 
   bool loading = false;
 
@@ -45,12 +45,12 @@ class _HomePageState extends State<HomePage> {
       // Ex categoryData[0] = [1, 'Rugby']
       List<String> categoryData = e.key.toString().split(' ');
 
-      CategoryModel category = CategoryModel(int.parse(categoryData[0]), categoryData[1]);
+      Category category = Category(int.parse(categoryData[0]), categoryData[1]);
 
-      List<ProductModel> products = [];
+      List<Product> products = [];
 
       for(Map<dynamic, dynamic> p in e.value) {
-        ProductModel product = ProductModel.fromJson(p);
+        Product product = Product.fromJson(p);
         products.add(product);
       }
 
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void seeMoreProducts(CategoryModel category) {
+  void seeMoreProducts(Category category) {
     int productsDisplayedAfterUpdate = categoriesNbProductsDisplayed[category]! + productsPerPage;
 
     setState(() {
@@ -213,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
                             onPressed: () {
-                              print("Produit ${int.parse(entry.value[i].getId.toString())} ajouté au panier pour l'utilisateur ${UserModel.session?.getName}");
+                              print("Produit ${int.parse(entry.value[i].getId.toString())} ajouté au panier pour l'utilisateur ${User.session?.getName}");
                             },
                             child: const Icon(
                               Icons.add_shopping_cart,

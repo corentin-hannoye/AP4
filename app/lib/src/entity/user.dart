@@ -1,4 +1,4 @@
-class UserModel {
+class User {
 
   String? id;
   String? name;
@@ -8,11 +8,11 @@ class UserModel {
   String? zipCode;
   String? city;
 
-  static UserModel? session;
+  static User? session;
 
-  UserModel(this.id, this.name, this.firstname, this.phone, this.street, this.zipCode, this.city);
+  User(this.id, this.name, this.firstname, this.phone, this.street, this.zipCode, this.city);
 
-  UserModel.fromJson(Map json) {
+  User.fromJson(Map json) {
     id = json['id'];
     name = json['name'];
     firstname = json['firstname'];
@@ -26,7 +26,7 @@ class UserModel {
     session = this;
   }
 
-  static UserModel? getUser() {
+  static User? getUser() {
     return session;
   }
 

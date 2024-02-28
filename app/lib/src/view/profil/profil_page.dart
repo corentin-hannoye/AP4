@@ -1,4 +1,4 @@
-import 'package:app/model/user_model.dart';
+import 'package:app/src/entity/user.dart';
 import 'package:flutter/material.dart';
 
 class ProfilPage extends StatefulWidget {
@@ -10,7 +10,7 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
-  UserModel? user = UserModel.getUser();
+  User? user = User.getUser();
 
   @override
   Widget build(BuildContext context) {

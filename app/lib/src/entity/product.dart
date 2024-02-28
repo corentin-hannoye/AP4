@@ -1,8 +1,8 @@
 import 'package:intl/intl.dart';
 
-import 'category_model.dart';
+import 'category.dart';
 
-class ProductModel {
+class Product {
 
   String? id;
   String? name;
@@ -10,12 +10,12 @@ class ProductModel {
   String? unitPrice;
   int? weight;
   String? slug;
-  CategoryModel? category;
+  Category? category;
   List<String>? images;
 
-  ProductModel(this.id, this.name, this.description, this.unitPrice, this.weight, this.slug, this.category, this.images);
+  Product(this.id, this.name, this.description, this.unitPrice, this.weight, this.slug, this.category, this.images);
 
-  ProductModel.fromJson(Map json) {
+  Product.fromJson(Map json) {
 
     id = json['id'];
     name = json['name'];
@@ -26,7 +26,7 @@ class ProductModel {
     ).format(json['unit_price']);
     weight = json['weight'];
     slug = json['slug'];
-    category = CategoryModel.fromJson(json['category']);
+    category = Category.fromJson(json['category']);
 
     List<String> images = <String>[];
     for(var i = 0; i < json['productImgs'].length; i++) {
@@ -48,7 +48,7 @@ class ProductModel {
     return unitPrice;
   }
 
-  CategoryModel? get getCategory {
+  Category? get getCategory {
     return category;
   }
 
