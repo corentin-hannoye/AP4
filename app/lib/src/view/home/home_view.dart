@@ -10,14 +10,14 @@ import 'package:auto_height_grid_view/auto_height_grid_view.dart';
 
 import '../loader.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeViewState extends State<HomeView> {
   final String? apiUrl = dotenv.env['API_URL'];
   // Tous les produits avec leur catégorie respective
   final Map<Category, List<Product>> categoriesProducts = {};
@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const int productsPerPage = 4;
 
   Future<void> getCategoriesAndArticles() async {
+    return;
     final http.Response response = await http.get(Uri.parse('$apiUrl/api/categories-products'));
 
     if(response.statusCode != 200) {
@@ -80,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return sectionCategory();
+    return Text('Accueil');
   }
 
   Widget sectionCategory() {

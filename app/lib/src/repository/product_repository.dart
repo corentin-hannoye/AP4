@@ -1,4 +1,4 @@
-class ProductModel {
+class ProductRepository {
 
   Future<void> getCategoriesAndProducts() async {
 

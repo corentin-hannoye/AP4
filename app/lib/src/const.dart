@@ -1,5 +1,8 @@
 import 'dart:ui';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+final String? apiUrl = dotenv.env['API_URL'];
 const Color primaryColor = Color(0xff000000);
 const Color secondaryColor = Color(0xfff7882d);
 const Color whiteColor = Color(0xffffffff);
