@@ -1,4 +1,5 @@
 import 'package:app/src/entity/user.dart';
+import 'package:app/src/provider/app_state_provider.dart';
 import 'package:app/src/provider/user_provider.dart';
 import 'package:app/src/repository/user_repository.dart';
 import 'package:app/src/utils/input.dart';
@@ -6,14 +7,21 @@ import 'package:flutter/material.dart';
 
 class LoginValidationProvider extends ChangeNotifier {
 
+  String? _message;
+  String? get message => _message;
+  set message(String? message) => _message = message;
+
   final Map<String, Input> _inputs = {
     'email': Input(null, null),
     'password': Input(null, null),
   };
-
-  void setValue(String inputName, String value) {
-    _inputs[inputName]!.value = value.trim();
+  String? getValue(String inputName) {
+    return _inputs[inputName]!.value;
   }
+  void setValue(String inputName, String value) {
+    _inputs[inputName]!.value = value;
+  }
+
   String? getError(String inputName) => _inputs[inputName]!.error;
 
   bool _showPassword = false;
@@ -39,17 +47,23 @@ class LoginValidationProvider extends ChangeNotifier {
     return valid;
   }
 
-  void sendForm() async {
+  void sendForm(AppStateProvider appStateProvider, UserProvider userProvider) async {
+    appStateProvider.toggleLoading();
+
     String email = _inputs['email']!.value.toString();
     String password = _inputs['password']!.value.toString();
 
     User? user = await UserRepository().login(email, password);
 
+    appStateProvider.toggleLoading();
+
     if(user == null) {
-      print('no');
+      _message = 'Identifiants incorrects';
+      _inputs['password']!.value = '';
+
       return;
     }
-    print(user.firstname);
+    userProvider.setLogin();
   }
 
 }

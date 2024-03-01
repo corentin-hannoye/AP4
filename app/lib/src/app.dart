@@ -1,7 +1,10 @@
 import 'package:app/src/component/app_bar.dart';
 import 'package:app/src/component/app_theme.dart';
+import 'package:app/src/provider/app_state_provider.dart';
 import 'package:app/src/router.dart';
+import 'package:app/src/view/loader.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -14,9 +17,12 @@ class App extends StatelessWidget {
       routerConfig: getRouter(),
       builder: (context, child) {
         return SafeArea(
-          child: Scaffold(
-            appBar: appTopBar(context),
-            body: child
+          child: Consumer<AppStateProvider>(
+            builder: (_, value, __) => 
+              Scaffold(
+                appBar: appTopBar(context),
+                body: value.loading ? const LoaderView() : child
+              ),
           )
         );
       },

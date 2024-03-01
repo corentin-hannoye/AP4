@@ -1,15 +1,15 @@
 import 'package:app/src/entity/user.dart';
 import 'package:flutter/material.dart';
 
-class ProfilScreen extends StatefulWidget {
+class ProfilView extends StatefulWidget {
   final Function toggleConnected;
-  const ProfilScreen({required this.toggleConnected, super.key});
+  const ProfilView({required this.toggleConnected, super.key});
 
   @override
-  State<ProfilScreen> createState() => _ProfilScreenState();
+  State<ProfilView> createState() => _ProfilViewState();
 }
 
-class _ProfilScreenState extends State<ProfilScreen> {
+class _ProfilViewState extends State<ProfilView> {
   User? user = User.getUser();
 
   @override

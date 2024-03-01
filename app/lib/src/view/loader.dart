@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class LoaderPage extends StatefulWidget {
-  const LoaderPage({super.key});
+class LoaderView extends StatefulWidget {
+  const LoaderView({super.key});
 
   @override
-  State<LoaderPage> createState() => _LoaderPageState();
+  State<LoaderView> createState() => _LoaderViewState();
 }
 
-class _LoaderPageState extends State<LoaderPage> with SingleTickerProviderStateMixin {
+class _LoaderViewState extends State<LoaderView> with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2))..repeat();
 
   @override

@@ -1,89 +1,14 @@
-import 'dart:convert';
-
-import 'package:app/src/entity/category.dart';
-import 'package:app/src/entity/product.dart';
-import 'package:app/src/entity/user.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
-import 'package:auto_height_grid_view/auto_height_grid_view.dart';
 
-import '../loader.dart';
-
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  final String? apiUrl = dotenv.env['API_URL'];
-  // Tous les produits avec leur catégorie respective
-  final Map<Category, List<Product>> categoriesProducts = {};
-  // Toutes les catégories avec leur nombre de produit actuellement afficher à l'écran
-  final Map<Category, int> categoriesNbProductsDisplayed = {};
-
-  static const int productsPerPage = 4;
-
-  Future<void> getCategoriesAndArticles() async {
-    return;
-    final http.Response response = await http.get(Uri.parse('$apiUrl/api/categories-products'));
-
-    if(response.statusCode != 200) {
-      return;
-    }
-
-    final Map responseJson = jsonDecode(response.body);
-
-    for(MapEntry e in responseJson.entries) {
-      // Ex categoryData[0] = [1, 'Rugby']
-      List<String> categoryData = e.key.toString().split(' ');
-
-      Category category = Category(int.parse(categoryData[0]), categoryData[1]);
-
-      List<Product> products = [];
-
-      for(Map<dynamic, dynamic> p in e.value) {
-        Product product = Product.fromJson(p);
-        products.add(product);
-      }
-
-      if(products.length > productsPerPage) {
-        categoriesNbProductsDisplayed[category] = productsPerPage;
-      } else {
-        categoriesNbProductsDisplayed[category] = products.length;
-      }
-
-      setState(() {
-        categoriesProducts[category] = products;
-      });
-    }
-  }
-
-  void seeMoreProducts(Category category) {
-    int productsDisplayedAfterUpdate = categoriesNbProductsDisplayed[category]! + productsPerPage;
-
-    setState(() {
-      if(productsDisplayedAfterUpdate > categoriesProducts[category]!.length) {
-        categoriesNbProductsDisplayed[category] = categoriesProducts[category]!.length;
-        return;
-      }
-      categoriesNbProductsDisplayed[category] = productsDisplayedAfterUpdate;
-    });
-  }
-
-  @override
-  void initState() {
-    getCategoriesAndArticles();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Text('Accueil');
+    return const Text('En développement...');
   }
 
+  /*
   Widget sectionCategory() {
     return SingleChildScrollView(
       child: Container(
@@ -240,5 +165,6 @@ class _HomeViewState extends State<HomeView> {
         )
       ),
     );
-  }
+  }*/
+
 }
