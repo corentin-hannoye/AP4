@@ -10,29 +10,23 @@ import 'package:auto_height_grid_view/auto_height_grid_view.dart';
 
 import '../loader.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   final String? apiUrl = dotenv.env['API_URL'];
   // Tous les produits avec leur catégorie respective
   final Map<Category, List<Product>> categoriesProducts = {};
   // Toutes les catégories avec leur nombre de produit actuellement afficher à l'écran
   final Map<Category, int> categoriesNbProductsDisplayed = {};
 
-  bool loading = false;
-
   static const int productsPerPage = 4;
 
   Future<void> getCategoriesAndArticles() async {
-    setState(() {
-      loading = true;
-    });
-
     final http.Response response = await http.get(Uri.parse('$apiUrl/api/categories-products'));
 
     if(response.statusCode != 200) {
@@ -64,9 +58,6 @@ class _HomePageState extends State<HomePage> {
         categoriesProducts[category] = products;
       });
     }
-    setState(() {
-      loading = false;
-    });
   }
 
   void seeMoreProducts(Category category) {
@@ -89,9 +80,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return loading ?
-        const LoaderPage() :
-        sectionCategory();
+    return sectionCategory();
   }
 
   Widget sectionCategory() {

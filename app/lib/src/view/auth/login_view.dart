@@ -1,30 +1,18 @@
-import 'package:app/src/entity/user.dart';
-import 'package:app/src/model/user_model.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   bool hidePassword = true;
   String err = '';
-
-  Future<void> login() async {
-
-    Map user = await UserModel().login(email, password);
-
-    // Si tout se passe bien, nous appelons la function toggleConnected() dans main.dart, et ensuite nous sauvegardons la session de l'utilisateur
-    User user = User.fromJson(responseJson['user']);
-    user.saveUser();
-    print('connecté');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 onPressed: () {
                   if(_formKey.currentState!.validate()) {
-                    login();
+                    print('gg');
                   }
                 },
                 style: ElevatedButton.styleFrom(
