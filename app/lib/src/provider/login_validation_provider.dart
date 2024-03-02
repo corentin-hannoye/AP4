@@ -9,7 +9,9 @@ class LoginValidationProvider extends ChangeNotifier {
 
   String? _message;
   String? get message => _message;
-  set message(String? message) => _message = message;
+
+  bool _allowButton = false;
+  bool get allowButton => _allowButton;
 
   final Map<String, Input> _inputs = {
     'email': Input(null, null),
@@ -18,8 +20,12 @@ class LoginValidationProvider extends ChangeNotifier {
   String? getValue(String inputName) {
     return _inputs[inputName]!.value;
   }
-  void setValue(String inputName, String value) {
-    _inputs[inputName]!.value = value;
+  void setValue(String inputName, String? value) {
+    Input? input = _inputs[inputName];
+    input!.value = value;
+
+    _allowButton = isValid(input);
+    notifyListeners();
   }
 
   String? getError(String inputName) => _inputs[inputName]!.error;
@@ -31,19 +37,19 @@ class LoginValidationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isValid() {
+  bool isValid(Input targetInput) {
     bool valid = true;
 
     for(Input input in _inputs.values) {
       if(input.value == null || input.value!.isEmpty) {
-        input.error = 'Veuillez renseigner ce champs';
+        if(input == targetInput) {
+          targetInput.error = 'Veuillez renseigner ce champs';
+        }
         valid = false;
         continue;
       }
       input.error = null;
     }
-    notifyListeners();
-
     return valid;
   }
 
@@ -56,6 +62,7 @@ class LoginValidationProvider extends ChangeNotifier {
     User? user = await UserRepository().login(email, password);
 
     appStateProvider.toggleLoading();
+    _allowButton = false;
 
     if(user == null) {
       _message = 'Identifiants incorrects';

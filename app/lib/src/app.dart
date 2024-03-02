@@ -1,4 +1,5 @@
 import 'package:app/src/component/app_bar.dart';
+import 'package:app/src/component/app_bottom_navigation_bar.dart';
 import 'package:app/src/component/app_theme.dart';
 import 'package:app/src/provider/app_state_provider.dart';
 import 'package:app/src/router.dart';
@@ -21,7 +22,8 @@ class App extends StatelessWidget {
             builder: (_, value, __) => 
               Scaffold(
                 appBar: appTopBar(context),
-                body: value.loading ? const LoaderView() : child
+                body: value.loading ? const LoaderView() : child,
+                bottomNavigationBar: const AppBottomNavigationBar(),
               ),
           )
         );

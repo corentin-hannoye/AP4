@@ -31,4 +31,3 @@ class _ProfilViewState extends State<ProfilView> {
     );
   }
 }
-

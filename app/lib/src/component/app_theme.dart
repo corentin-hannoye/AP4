@@ -15,7 +15,7 @@ ThemeData appThemeData() {
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         fontSize: 30,
-        fontWeight: FontWeight.w900
+        fontWeight: FontWeight.bold
       ),
       displayMedium: TextStyle(
         fontSize: 30,
@@ -23,7 +23,7 @@ ThemeData appThemeData() {
       ),
       bodyLarge: TextStyle(
         fontSize: 16,
-        fontWeight: FontWeight.w900
+        fontWeight: FontWeight.bold
       ),
       bodyMedium: TextStyle(
         fontSize: 16,
@@ -31,7 +31,7 @@ ThemeData appThemeData() {
       ),
       labelLarge: TextStyle(
         fontSize: 16,
-        fontWeight: FontWeight.w900
+        fontWeight: FontWeight.bold
       ),
       labelSmall: TextStyle(
         fontSize: 16,

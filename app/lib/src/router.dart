@@ -21,11 +21,11 @@ GoRouter getRouter() {
     redirect: (context, state) {
       UserProvider userProvider = Provider.of<UserProvider>(context);
 
-      if(!userProvider.getIsLogin && state.fullPath != Routes.login) {
+      if(!userProvider.isLogin && state.fullPath != Routes.login) {
         return Routes.login;
       }
 
-      if(userProvider.getIsLogin && state.fullPath == Routes.login) {
+      if(userProvider.isLogin && state.fullPath == Routes.login) {
         return Routes.home;
       }
       return null;

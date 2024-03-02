@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 AppBar appTopBar(BuildContext context) {
+
   UserProvider userProvider = Provider.of<UserProvider>(context);
+
   return AppBar(
     title: Image.asset(
       'assets/images/logo.png',
       width: 50
     ),
     actions: <Widget>[
-      if(userProvider.getIsLogin)
+      if(userProvider.isLogin)
         TextButton(
           onPressed: () {
             print('QR CODE...');
@@ -26,4 +28,5 @@ AppBar appTopBar(BuildContext context) {
     backgroundColor: primaryColor,
     centerTitle: true,
   );
+
 }

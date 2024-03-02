@@ -1,10 +1,11 @@
-import 'dart:ui';
-
+import 'package:app/src/const.dart';
 import 'package:app/src/provider/app_state_provider.dart';
 import 'package:app/src/provider/login_validation_provider.dart';
 import 'package:app/src/provider/user_provider.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -56,6 +57,7 @@ class LoginView extends StatelessWidget {
                     )
                   ),
                   onChanged: (fieldValue) => loginValidationProvider.setValue('email', fieldValue),
+                  onTapOutside: (event) => loginValidationProvider.setValue('email', loginValidationProvider.getValue('email')),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
@@ -83,30 +85,54 @@ class LoginView extends StatelessWidget {
                     )
                   ),
                   onChanged: (fieldValue) => loginValidationProvider.setValue('password', fieldValue),
+                  onTapOutside: (event) => loginValidationProvider.setValue('password', loginValidationProvider.getValue('password')),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 40),
                 ElevatedButton(
-                  onPressed: () {
-                    if(loginValidationProvider.isValid()) {
-                      loginValidationProvider.sendForm(appStateProvider, userProvider);
-                    }
-                  },
+                  onPressed: loginValidationProvider.allowButton ? () {
+                    loginValidationProvider.sendForm(appStateProvider, userProvider);
+                  } : null,
                   style: ElevatedButton.styleFrom(
                     textStyle: Theme.of(context).textTheme.bodyMedium,
                     elevation: 0,
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                    side: const BorderSide(
-                      width: 1,
-                    ),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                     ),
                   ),
-                  child: const Text(
-                    'Connexion'
-                  )
+                  child: const Text('Connexion')
                 ),
+                const SizedBox(height: 20),
+                const Divider(
+                  color: disabledColor,
+                  height: 1,
+                  indent: 10,
+                  endIndent: 10,
+                ),
+                const SizedBox(height: 20),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: 'Pas encore inscrit ? ',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: ' Inscrivez-vous ',
+                        style: TextStyle(
+                          background: Paint()..color = Theme.of(context).colorScheme.primary,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                        recognizer: TapGestureRecognizer()..onTap = () async {
+                          if(!await launchUrl(Uri.parse('$apiUrl/connexion'))) {
+                            throw Exception('Erreur lors du lancement');
+                          }
+                        }
+                      ),
+                      const TextSpan(text: ' dès maintenant !'),
+                    ],
+                  ),
+                )
               ]
             )
           ),
