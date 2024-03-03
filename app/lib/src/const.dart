@@ -13,6 +13,7 @@ const Color linkColor = Color(0xff3b82f6);
 const Color disabledColor = Color(0xFFCCCCCC);
 
 abstract class Routes {
-  static const String home = '/';
   static const String login = '/login';
+  static const String home = '/';
+  static const String account = '/account';
 }

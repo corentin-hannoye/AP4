@@ -1,11 +1,14 @@
 import 'package:app/src/const.dart';
 import 'package:app/src/provider/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {
-  const AppBottomNavigationBar({super.key});
+  final StatefulNavigationShell? statefulNavigationShell;
+
+  const AppBottomNavigationBar({required this.statefulNavigationShell, super.key});
 
   @override
   State<AppBottomNavigationBar> createState() => _AppBottomNavigationBarState();
@@ -30,6 +33,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
         setState(() {
           _selectedIndex = index;
         });
+        widget.statefulNavigationShell!.goBranch(index);
       },
       iconSize: 30,
       activeColor: Theme.of(context).colorScheme.secondary,

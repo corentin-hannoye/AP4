@@ -4,6 +4,7 @@ import 'package:app/src/entity/product.dart';
 import 'package:app/src/entity/user.dart';
 import 'package:app/src/provider/product_list_provider.dart';
 import 'package:auto_height_grid_view/auto_height_grid_view.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,28 +13,27 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProductListProvider>(
-      builder: (context, value, child) {
-        if(value.categoriesProducts == null) {
-          return const Text('Chargement...');
-        }
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(10, 60, 10, 0),
+        child: Consumer<ProductListProvider>(
+          builder: (context, value, child) {
+            if(value.categoriesProducts == null) {
+              return const CircularProgressIndicator();
+            }
 
-        return SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.fromLTRB(10, 60, 10, 0),
-            child: Column(
+            return Column(
               children: [
                 ...value.categoriesProducts.entries.map((entry) => card(context, value, entry))
-              ]
-            )
-          )
-        );
-      }
+              ],
+            );
+          }
+        )
+      )
     );
   }
 
   Widget card(BuildContext context, ProductListProvider productListProvider, MapEntry<Category, List<Product>> mapEntry) {
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -57,8 +57,8 @@ class HomeView extends StatelessWidget {
           mainAxisSpacing: 10,
           crossAxisSpacing: 5,
           padding: null,
-          builder: (context, i) {
-            return Container(
+          builder: (context, i) =>
+            Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.onPrimary,
@@ -80,21 +80,12 @@ class HomeView extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    child: Image.network(
-                      '$apiUrl/media/images/product/${mapEntry.value[i].getId}/${mapEntry.value[i].getImages?[0]}',
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if(loadingProgress == null) {
-                          return child;
-                        }
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                                : null,
-                          ),
-                        );
-                      }
+                    child: CachedNetworkImage(
+                      maxWidthDiskCache: 200,
+                      maxHeightDiskCache: 200,
+                      imageUrl: '$apiUrl/media/images/product/${mapEntry.value[i].getId}/${mapEntry.value[i].getImages?[0]}',
+                      progressIndicatorBuilder: (_, __, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
+                      errorWidget: (_, __, ___) => const Icon(Icons.error),
                     ),
                   ),
                   Container(
@@ -156,8 +147,7 @@ class HomeView extends StatelessWidget {
                   )
                 ],
               )
-            );
-          }
+            )
         ),
         const SizedBox(height: 10),
         if(mapEntry.value.length > productListProvider.categoriesNbProductsDisplayed[mapEntry.key])

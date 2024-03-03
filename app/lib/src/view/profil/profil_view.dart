@@ -1,33 +1,34 @@
-import 'package:app/src/entity/user.dart';
+import 'package:app/src/provider/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfilView extends StatefulWidget {
-  final Function toggleConnected;
-  const ProfilView({required this.toggleConnected, super.key});
+  const ProfilView({super.key});
 
   @override
   State<ProfilView> createState() => _ProfilViewState();
 }
 
 class _ProfilViewState extends State<ProfilView> {
-  User? user = User.getUser();
-
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text("Page de profil de l'utilisateur ${user?.getName}"),
-          TextButton(
-            onPressed: () => widget.toggleConnected(),
-            child: Text(
-              'Déconnexion',
-              style: Theme.of(context).textTheme.bodyMedium,
+      child: Consumer<UserProvider>(
+        builder: (context, value, child) => 
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Page de profil de l'utilisateur ${value.session?.getName}"),
+            TextButton(
+              onPressed: () => value.toggleLogin(value.session),
+              child: Text(
+                'Déconnexion',
+                style: Theme.of(context).textTheme.bodyMedium,
+              )
             )
-          )
-        ],
-      ),
+          ],
+        ),
+      )
     );
   }
 }

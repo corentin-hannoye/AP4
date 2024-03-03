@@ -53,6 +53,14 @@ class LoginValidationProvider extends ChangeNotifier {
     return valid;
   }
 
+  void reset() {
+    _inputs['password']!.value = null;
+    _inputs['email']!.value = null;
+    _message = null;
+    _allowButton = false;
+    _showPassword = false;
+  }
+
   void sendForm(AppStateProvider appStateProvider, UserProvider userProvider) async {
     appStateProvider.toggleLoading();
 
@@ -66,11 +74,12 @@ class LoginValidationProvider extends ChangeNotifier {
 
     if(user == null) {
       _message = 'Identifiants incorrects';
-      _inputs['password']!.value = '';
-
+      _inputs['password']!.value = null;
       return;
     }
-    userProvider.setLogin();
+
+    reset();
+    userProvider.toggleLogin(user);
   }
 
 }
