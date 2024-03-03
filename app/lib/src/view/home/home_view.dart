@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ProductListProvider>(
-      builder: (context, value, child) { 
+      builder: (context, value, child) {
         if(value.categoriesProducts == null) {
           return const Text('Chargement...');
         }
@@ -23,7 +23,7 @@ class HomeView extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(10, 60, 10, 0),
             child: Column(
               children: [
-                ...value.categoriesProducts.entries.map((entry) => card(context, entry))
+                ...value.categoriesProducts.entries.map((entry) => card(context, value, entry))
               ]
             )
           )
@@ -32,7 +32,7 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget card(BuildContext context, MapEntry<Category, List<Product>> mapEntry) {
+  Widget card(BuildContext context, ProductListProvider productListProvider, MapEntry<Category, List<Product>> mapEntry) {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +52,7 @@ class HomeView extends StatelessWidget {
         const SizedBox(height: 10),
         AutoHeightGridView(
           shrinkWrap: true,
-          itemCount: Provider.of<ProductListProvider>(context).categoriesNbProductsDisplayed[mapEntry.key],
+          itemCount: productListProvider.categoriesNbProductsDisplayed[mapEntry.key],
           crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 5,
@@ -160,7 +160,7 @@ class HomeView extends StatelessWidget {
           }
         ),
         const SizedBox(height: 10),
-        if(mapEntry.value.length > Provider.of<ProductListProvider>(context).categoriesNbProductsDisplayed[mapEntry.key])
+        if(mapEntry.value.length > productListProvider.categoriesNbProductsDisplayed[mapEntry.key])
           Center(
             child: TextButton(
               style: ElevatedButton.styleFrom(
@@ -169,7 +169,7 @@ class HomeView extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Provider.of<ProductListProvider>(context, listen: false).seeMoreProducts(mapEntry.key);
+                productListProvider.seeMoreProducts(mapEntry.key);
               },
               child: Text(
                 'Voir plus',
