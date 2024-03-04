@@ -36,4 +36,27 @@ class ProductRepository {
     return categoriesProducts;
   }
 
+  Future<Product?> findProductByRef(String ref) async {
+    String supplier = ref.substring(0, 3);
+    String category = ref.substring(3, 6);
+    String productId = ref.substring(6);
+
+    final Uri uri = Uri.parse('$apiUrl/api/product/ref').replace(queryParameters: {
+      'supplier': supplier,
+      'category': category,
+      'productId': productId
+    });
+    final http.Response response = await http.get(uri);
+
+    if(response.statusCode != 200) {
+      return null;
+    }
+
+    final Map responseJson = jsonDecode(response.body);
+
+    Product product = Product.fromJson(responseJson);
+
+    return product;
+  }
+
 }

@@ -1,19 +1,19 @@
 class Category {
 
-  int? id;
-  String? name;
+  int? _id;
+  String? _name;
 
-  Category(this.id, this.name);
+  int? get id => _id;
+
+  String? get name => _name;
+
+  Category(this._id, this._name);
 
   Category.fromJson(Map json) {
 
-    id = json['id'];
-    name = json['name'];
+    _id = json['id'];
+    _name = json['name'];
 
-  }
-
-  String? get getName {
-    return name;
   }
 
 }

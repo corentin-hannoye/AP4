@@ -1,6 +1,7 @@
 import 'package:app/src/const.dart';
 import 'package:app/src/provider/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 AppBar appTopBar(BuildContext context) {
@@ -15,9 +16,7 @@ AppBar appTopBar(BuildContext context) {
     actions: <Widget>[
       if(userProvider.isLogin)
         TextButton(
-          onPressed: () {
-            print('QR CODE...');
-          },
+          onPressed: () => context.push(Routes.QRCode),
           child: const Icon(
             Icons.qr_code_scanner,
             color: whiteColor

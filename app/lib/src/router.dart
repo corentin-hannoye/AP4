@@ -1,7 +1,9 @@
 import 'package:app/src/const.dart';
 import 'package:app/src/provider/user_provider.dart';
+import 'package:app/src/view/QRCode/qr_code_view.dart';
 import 'package:app/src/view/auth/login_view.dart';
 import 'package:app/src/view/home/home_view.dart';
+import 'package:app/src/view/product/product_view.dart';
 import 'package:app/src/view/profil/profil_view.dart';
 import 'package:app/src/wrapper.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +47,14 @@ GoRouter getRouter(context) {
             ]
           ),
         ]
+      ),
+      GoRoute(
+        path: Routes.QRCode,
+        builder: (_, __) => const QRCode()
+      ),
+      GoRoute(
+        path: Routes.product,
+        builder: (_, __) => const ProductView()
       ),
     ],
     redirect: (context, state) {

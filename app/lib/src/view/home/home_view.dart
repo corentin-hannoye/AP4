@@ -21,7 +21,6 @@ class HomeView extends StatelessWidget {
             if(value.categoriesProducts == null) {
               return const CircularProgressIndicator();
             }
-
             return Column(
               children: [
                 ...value.categoriesProducts.entries.map((entry) => card(context, value, entry))
@@ -39,7 +38,7 @@ class HomeView extends StatelessWidget {
       children: <Widget>[
         RichText(
           text: TextSpan(
-            text: '${mapEntry.key.getName.toString().toUpperCase()} ',
+            text: '${mapEntry.key.name.toString().toUpperCase()} ',
             style: Theme.of(context).textTheme.displayLarge,
             children: <TextSpan>[
               TextSpan(
@@ -83,7 +82,7 @@ class HomeView extends StatelessWidget {
                     child: CachedNetworkImage(
                       maxWidthDiskCache: 200,
                       maxHeightDiskCache: 200,
-                      imageUrl: '$apiUrl/media/images/product/${mapEntry.value[i].getId}/${mapEntry.value[i].getImages?[0]}',
+                      imageUrl: '$apiUrl/media/images/product/${mapEntry.value[i].id}/${mapEntry.value[i].images?[0]}',
                       progressIndicatorBuilder: (_, __, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
                       errorWidget: (_, __, ___) => const Icon(Icons.error),
                     ),
@@ -101,7 +100,7 @@ class HomeView extends StatelessWidget {
                       )
                     ),
                     child: Text(
-                      mapEntry.value[i].getName.toString(),
+                      mapEntry.value[i].name.toString(),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
@@ -117,7 +116,7 @@ class HomeView extends StatelessWidget {
                       vertical: 8
                     ),
                     child: Text(
-                      mapEntry.value[i].getUnitPrice.toString(),
+                      mapEntry.value[i].unitPrice.toString(),
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold
@@ -138,7 +137,7 @@ class HomeView extends StatelessWidget {
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
                     onPressed: () {
-                      print("Produit ${int.parse(mapEntry.value[i].getId.toString())} ajouté au panier pour l'utilisateur ${User.session?.getName}");
+                      print("Produit ${int.parse(mapEntry.value[i].id.toString())} ajouté au panier pour l'utilisateur ${User.session?.getName}");
                     },
                     child: const Icon(
                       Icons.add_shopping_cart,
