@@ -10,28 +10,23 @@ class QRCodeProvider extends ChangeNotifier {
   final GlobalKey _qrKey = GlobalKey();
   GlobalKey get qrKey => _qrKey;
 
-  Product? product;
+  Product? _product;
+  Product? get product => _product;
 
   void initQRCode(BuildContext context, QRViewController qrViewController) {
-
-    if(product != null) {
-      return;
-    }
-    product = Product();
 
     qrViewController.scannedDataStream.listen((e) async {
       Product? productFinded = await ProductRepository().findProductByRef(e.code.toString());
 
       if(productFinded == null) {
-        product = null;
+        _product = null;
         return;
       }
+      _product = productFinded;
 
       if(!context.mounted) {
         return;
       }
-
-      product = productFinded;
       context.replace(Routes.product);
     });
 

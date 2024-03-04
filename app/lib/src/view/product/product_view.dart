@@ -1,4 +1,7 @@
+import 'package:app/src/const.dart';
+import 'package:app/src/entity/store.dart';
 import 'package:app/src/provider/qr_code_provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -20,23 +23,92 @@ class ProductView extends StatelessWidget {
         ),
         centerTitle: true,
         leading: GestureDetector(
-          onTap: ()  {
-            qrCodeProvider.product = null;
-            context.pop();
-          },
+          onTap: ()  => context.pop(),
           child: const Icon(Icons.arrow_back_outlined),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.fromLTRB(10, 60, 10, 0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(10.0, 60.0, 10.0, 20.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(qrCodeProvider.product!.name.toString()),
+            Center(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(4)),
+                child: CachedNetworkImage(
+                  maxWidthDiskCache: 200,
+                  maxHeightDiskCache: 200,
+                  imageUrl: '$apiUrl/media/images/product/${qrCodeProvider.product!.id}/${qrCodeProvider.product!.images?[0]}',
+                  progressIndicatorBuilder: (_, __, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
+                  errorWidget: (_, __, ___) => const Icon(Icons.error),
+                ),
+              ),
+            ),
             const SizedBox(height: 10.0),
-            Text(qrCodeProvider.product!.description.toString()),
+            const Divider(),
+            const SizedBox(height: 10.0),
+            Text(
+              'Libellé',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const SizedBox(height: 10.0),
+            Text(
+              qrCodeProvider.product!.name.toString()
+            ),
+            const SizedBox(height: 20.0),
+            Text(
+              'Description',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const SizedBox(height: 10.0),
+            Text(
+              qrCodeProvider.product!.description.toString(),
+            ),
+            const SizedBox(height: 20.0),
+            Text(
+              'Prix',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const SizedBox(height: 10.0),
+            Text(
+              qrCodeProvider.product!.unitPrice.toString(),
+            ),
+            const SizedBox(height: 20.0),
+            Text(
+              'Disponibilité',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const SizedBox(height: 10.0),
+            test(qrCodeProvider.product?.stores)
           ],
         ),
       ),
+    );
+  }
+
+  Widget test(List<Store>? stores) {
+
+    if(stores == null || stores.isEmpty) {
+      return const Text('Produit en rupture de stock dans nos magasins');
+    }
+
+    return Column(
+      children: [
+        ...stores.map((store) =>
+          Row(
+            children: [
+              Text('(${store.country.toString()}) '),
+              Text('${store.city} '),
+              Text(
+                '${store.quantity} unit.',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ],
+          )
+        )
+      ],
     );
   }
 }

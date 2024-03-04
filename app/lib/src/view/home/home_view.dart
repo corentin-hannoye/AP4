@@ -15,7 +15,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: const EdgeInsets.fromLTRB(10, 60, 10, 0),
+        padding: const EdgeInsets.fromLTRB(10.0, 60.0, 10.0, 0.0),
         child: Consumer<ProductListProvider>(
           builder: (context, value, child) {
             if(value.categoriesProducts == null) {
@@ -48,13 +48,13 @@ class HomeView extends StatelessWidget {
             ]
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 10.0),
         AutoHeightGridView(
           shrinkWrap: true,
           itemCount: productListProvider.categoriesNbProductsDisplayed[mapEntry.key],
           crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 5,
+          mainAxisSpacing: 10.0,
+          crossAxisSpacing: 5.0,
           padding: null,
           builder: (context, i) =>
             Container(
@@ -63,12 +63,12 @@ class HomeView extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onPrimary,
                 border: Border.all(
                     color: const Color(0xffdddddd),
-                    width: 1
+                    width: 1.0
                 ),
                 boxShadow: const [
                   BoxShadow(
                       color: Color(0x1a000000),
-                      blurRadius: 4,
+                      blurRadius: 4.0,
                       blurStyle: BlurStyle.outer
                   )
                 ],
@@ -89,7 +89,7 @@ class HomeView extends StatelessWidget {
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(
-                      vertical: 10
+                      vertical: 10.0
                     ),
                     padding: const EdgeInsets.all(10),
                     decoration: const BoxDecoration(
@@ -113,7 +113,7 @@ class HomeView extends StatelessWidget {
                       borderRadius: const BorderRadius.all(Radius.circular(4))
                     ),
                     padding: const EdgeInsets.symmetric(
-                      vertical: 8
+                      vertical: 8.0
                     ),
                     child: Text(
                       mapEntry.value[i].unitPrice.toString(),
@@ -123,7 +123,7 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 5.0),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -132,7 +132,7 @@ class HomeView extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(4)),
                       ),
                       padding: const EdgeInsets.symmetric(
-                        vertical: 8
+                        vertical: 8.0
                       ),
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
@@ -148,13 +148,13 @@ class HomeView extends StatelessWidget {
               )
             )
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 10.0),
         if(mapEntry.value.length > productListProvider.categoriesNbProductsDisplayed[mapEntry.key])
           Center(
             child: TextButton(
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 20
+                  horizontal: 20.0
                 ),
               ),
               onPressed: () {
@@ -166,7 +166,7 @@ class HomeView extends StatelessWidget {
               ),
             ),
           ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 30.0),
       ],
     );
   }
