@@ -1,7 +1,7 @@
 import 'package:app/src/const.dart';
 import 'package:app/src/entity/category.dart';
 import 'package:app/src/entity/product.dart';
-import 'package:app/src/entity/user.dart';
+import 'package:app/src/provider/cart_provider.dart';
 import 'package:app/src/provider/product_list_provider.dart';
 import 'package:auto_height_grid_view/auto_height_grid_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -33,6 +33,8 @@ class HomeView extends StatelessWidget {
   }
 
   Widget card(BuildContext context, ProductListProvider productListProvider, MapEntry<Category, List<Product>> mapEntry) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -136,9 +138,7 @@ class HomeView extends StatelessWidget {
                       ),
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
-                    onPressed: () {
-                      print("Produit ${int.parse(mapEntry.value[i].id.toString())} ajouté au panier pour l'utilisateur ${User.session?.getName}");
-                    },
+                    onPressed: () => cartProvider.addProduct(mapEntry.value[i]),
                     child: const Icon(
                       Icons.add_shopping_cart,
                       color: Color(0xff888888)

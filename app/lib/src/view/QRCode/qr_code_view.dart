@@ -5,9 +5,9 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 // 3 first letters of supplier, 3 first letters of category and id (INT A.I. 12 length)
 // E.g : 
-class QRCode extends StatelessWidget {
+class QRCodeView extends StatelessWidget {
 
-  const QRCode({super.key});
+  const QRCodeView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ import 'package:app/src/entity/user.dart';
 import 'package:flutter/foundation.dart';
 
 class UserProvider extends ChangeNotifier {
-  bool _isLogin = true;
+  bool _isLogin = false;
   bool get isLogin => _isLogin;
   void toggleLogin(User? user) {
     if(user == null) {

@@ -18,4 +18,5 @@ abstract class Routes {
   static const String account = '/account';
   static const String QRCode = '/qr-code';
   static const String product = '/product';
+  static const String cart = '/cart';
 }

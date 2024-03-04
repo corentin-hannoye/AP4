@@ -1,5 +1,6 @@
 import 'package:app/src/app.dart';
 import 'package:app/src/provider/app_state_provider.dart';
+import 'package:app/src/provider/cart_provider.dart';
 import 'package:app/src/provider/login_validation_provider.dart';
 import 'package:app/src/provider/product_list_provider.dart';
 import 'package:app/src/provider/qr_code_provider.dart';
@@ -19,6 +20,7 @@ Future<void> main() async {
         ChangeNotifierProvider<LoginValidationProvider>(create: (_) => LoginValidationProvider()),
         ChangeNotifierProvider<ProductListProvider>(create: (_) => ProductListProvider()),
         ChangeNotifierProvider<QRCodeProvider>(create: (_) => QRCodeProvider()),
+        ChangeNotifierProvider<CartProvider>(create: (_) => CartProvider()),
       ],
       child: const App(),
     )
