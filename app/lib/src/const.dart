@@ -7,8 +7,8 @@ final String? apiUrl = dotenv.env['API_URL'];
 const Color primaryColor = Color(0xff000000);
 const Color secondaryColor = Color(0xfff7882d);
 const Color whiteColor = Color(0xffffffff);
-const Color successColor = Color(0xff3fbf4f);
-const Color errorColor = Color(0xffe84f4f);
+const Color successColor = Color(0xFF0E9720);
+const Color errorColor = Color(0xFFC93131);
 const Color linkColor = Color(0xff3b82f6);
 const Color disabledColor = Color(0xFFCCCCCC);
 

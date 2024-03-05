@@ -18,7 +18,7 @@ class _ProfilViewState extends State<ProfilView> {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Page de profil de l'utilisateur ${value.session?.getName}"),
+            Text("Page de profil de l'utilisateur ${value.session?.name}"),
             TextButton(
               onPressed: () => value.toggleLogin(value.session),
               child: Text(

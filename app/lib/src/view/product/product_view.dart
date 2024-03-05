@@ -1,6 +1,7 @@
 import 'package:app/src/const.dart';
 import 'package:app/src/entity/store.dart';
 import 'package:app/src/provider/qr_code_provider.dart';
+import 'package:app/src/utils/formatPrice.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -71,7 +72,7 @@ class ProductView extends StatelessWidget {
             ),
             const SizedBox(height: 10.0),
             Text(
-              qrCodeProvider.product!.unitPrice.toString(),
+              formatPrice(qrCodeProvider.product!.unitPrice!),
             ),
             const SizedBox(height: 20.0),
             Text(

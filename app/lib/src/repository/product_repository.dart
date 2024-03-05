@@ -19,10 +19,10 @@ class ProductRepository {
     Map<Category, List<Product>> categoriesProducts = {};
 
     for(MapEntry e in responseJson.entries) {
-      // Ex categoryData[0] = [1, 'Rugby']
+      // Ex categoryData[0] = [1, 'Rugby', 'rugby']
       List<String> categoryData = e.key.toString().split(' ');
 
-      Category category = Category(int.parse(categoryData[0]), categoryData[1]);
+      Category category = Category(int.parse(categoryData[0]), categoryData[1], categoryData[2]);
 
       List<Product> products = [];
 

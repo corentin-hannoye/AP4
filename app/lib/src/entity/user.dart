@@ -1,37 +1,25 @@
 class User {
+  String? _id;
+  String? _name;
+  String? _firstname;
+  String? _phone;
+  String? _street;
+  String? _zipCode;
+  String? _city;
 
-  String? id;
-  String? name;
-  String? firstname;
-  String? phone;
-  String? street;
-  String? zipCode;
-  String? city;
-
-  static User? session;
-
-  User(this.id, this.name, this.firstname, this.phone, this.street, this.zipCode, this.city);
+  User(this._id, this._name, this._firstname, this._phone, this._street, this._zipCode, this._city);
 
   User.fromJson(Map json) {
-    id = json['id'];
-    name = json['name'];
-    firstname = json['firstname'];
-    phone = json['phone'];
-    street = json['street'];
-    zipCode = json['zipCode'];
-    city = json['city'];
+    _id = json['id'];
+    _name = json['name'];
+    _firstname = json['firstname'];
+    _phone = json['phone'];
+    _street = json['street'];
+    _zipCode = json['zipCode'];
+    _city = json['city'];
   }
 
-  void saveUser() {
-    session = this;
+  String? get name {
+    return _name;
   }
-
-  static User? getUser() {
-    return session;
-  }
-
-  String? get getName {
-    return name;
-  }
-
 }

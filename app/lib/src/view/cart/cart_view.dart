@@ -1,6 +1,8 @@
 import 'package:app/src/const.dart';
 import 'package:app/src/entity/product.dart';
 import 'package:app/src/provider/cart_provider.dart';
+import 'package:app/src/provider/user_provider.dart';
+import 'package:app/src/utils/formatPrice.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +12,7 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
     CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     return SingleChildScrollView(
@@ -17,25 +20,43 @@ class CartView extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(10.0, 60.0, 10.0, 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             Text(
               'Mon panier',
               style: Theme.of(context).textTheme.displayLarge,
             ),
             const SizedBox(height: 20.0),
             if(cartProvider.productCount <= 0)
-              const Text("Votre panier est vide")
+              const Text("Votre panier est vide, ajoutez-y des produits dès maintenant !")
             else
-              ...cartProvider.products.entries.map((entry) => card(entry))
+              details(userProvider, cartProvider),
+              const SizedBox(height: 20.0),
+              ...cartProvider.products.entries.map((entry) => card(cartProvider, entry))
           ],
         ),
       )
     );
   }
-  
-  Widget card(MapEntry<Product, int> mapEntry) {
+
+  Widget details(UserProvider userProvider, CartProvider cartProvider) {
     return Column(
-      children: [
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text('Total de la commande : ${formatPrice(cartProvider.getTotalPrice())}'),
+        Text('Nombre de produits : ${cartProvider.productCount}'),
+        // Text('Loc : ${userProvider.position}')
+      ],
+    );
+  }
+  
+  Widget card(CartProvider cartProvider, MapEntry<Product, int> mapEntry) {
+    List<int> choices = [0,1,2,3,4,5,6,7,8,9,10];
+
+    if(!choices.contains(mapEntry.value)) {
+      choices.add(mapEntry.value);
+    }
+    return Column(
+      children: <Widget>[
         const SizedBox(height: 10.0),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,18 +74,39 @@ class CartView extends StatelessWidget {
             const SizedBox(width: 10.0),
             Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
                     mapEntry.key.name.toString(),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
-                  TextFormField(
-                    key: Key(mapEntry.value.toString()),
-                    initialValue: mapEntry.value.toString(),
-                    keyboardType: TextInputType.number,
-                    onChanged: (value) => print(value),
-                  )
+                  const SizedBox(height: 10.0),
+                  DropdownMenu<int>(
+                    key: GlobalKey(),
+                    initialSelection: mapEntry.value,
+                    onSelected: (value) => cartProvider.setProduct(mapEntry.key, value!),
+                    expandedInsets: EdgeInsets.zero,
+                    label: const Text('Quantité'),
+                    dropdownMenuEntries: [
+                      ...choices.map((e) {
+                        return DropdownMenuEntry(
+                          leadingIcon: e == 0 ? const Icon(Icons.delete) : null,
+                          label: e.toString() + (e == 0 ? ' (supprimer)' : ''),
+                          value: e,
+                        );
+                      })
+                    ],
+                  ),
+                  const SizedBox(height: 5.0),
+                  Text(
+                    mapEntry.key.ref.toString(),
+                    style: const TextStyle(
+                      fontSize: 12.0,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                  const SizedBox(height: 10.0),
                 ],
               )
             )
