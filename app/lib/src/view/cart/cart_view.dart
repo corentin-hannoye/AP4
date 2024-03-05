@@ -42,9 +42,9 @@ class CartView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('Total de la commande : ${formatPrice(cartProvider.getTotalPrice())}'),
-        Text('Nombre de produits : ${cartProvider.productCount}'),
-        // Text('Loc : ${userProvider.position}')
+        Text('Prix à payer : ${formatPrice(cartProvider.getTotalPrice())} pour ${cartProvider.productCount} produits'),
+        const SizedBox(height: 20.0),
+        const Text('Magasin le plus proche : XXX')
       ],
     );
   }
@@ -64,6 +64,8 @@ class CartView extends StatelessWidget {
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(4)),
               child: CachedNetworkImage(
+                memCacheWidth: 150,
+                memCacheHeight: 150,
                 maxWidthDiskCache: 150,
                 maxHeightDiskCache: 150,
                 imageUrl: '$apiUrl/media/images/product/${mapEntry.key.id}/${mapEntry.key.images?[0]}',
@@ -81,23 +83,6 @@ class CartView extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
-                  const SizedBox(height: 10.0),
-                  DropdownMenu<int>(
-                    key: GlobalKey(),
-                    initialSelection: mapEntry.value,
-                    onSelected: (value) => cartProvider.setProduct(mapEntry.key, value!),
-                    expandedInsets: EdgeInsets.zero,
-                    label: const Text('Quantité'),
-                    dropdownMenuEntries: [
-                      ...choices.map((e) {
-                        return DropdownMenuEntry(
-                          leadingIcon: e == 0 ? const Icon(Icons.delete) : null,
-                          label: e.toString() + (e == 0 ? ' (supprimer)' : ''),
-                          value: e,
-                        );
-                      })
-                    ],
-                  ),
                   const SizedBox(height: 5.0),
                   Text(
                     mapEntry.key.ref.toString(),
@@ -107,6 +92,32 @@ class CartView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10.0),
+                  DropdownMenu<int>(
+                    key: GlobalKey(),
+                    initialSelection: mapEntry.value,
+                    onSelected: (value) => cartProvider.setProduct(mapEntry.key, value!),
+                    expandedInsets: EdgeInsets.zero,
+                    label: const Text('Quantité'),
+                    inputDecorationTheme: const InputDecorationTheme(
+                      isDense: true,
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 5.0,
+                      ),
+                      constraints: BoxConstraints.expand(
+                        width: 150.0,
+                        height: 50.0
+                      ),
+                    ),
+                    dropdownMenuEntries: [
+                      ...choices.map((e) =>
+                        DropdownMenuEntry(
+                          leadingIcon: e == 0 ? const Icon(Icons.delete) : null,
+                          label: e.toString() + (e == 0 ? ' (supprimer)' : ''),
+                          value: e,
+                        )
+                      )
+                    ],
+                  ),
                 ],
               )
             )

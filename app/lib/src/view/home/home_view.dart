@@ -1,3 +1,4 @@
+import 'package:app/src/component/cartAddButton.dart';
 import 'package:app/src/const.dart';
 import 'package:app/src/entity/category.dart';
 import 'package:app/src/entity/product.dart';
@@ -83,6 +84,8 @@ class HomeView extends StatelessWidget {
                   ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(4)),
                     child: CachedNetworkImage(
+                      memCacheWidth: 200,
+                      memCacheHeight: 200,
                       maxWidthDiskCache: 200,
                       maxHeightDiskCache: 200,
                       imageUrl: '$apiUrl/media/images/product/${mapEntry.value[i].id}/${mapEntry.value[i].images?[0]}',
@@ -127,7 +130,7 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5.0),
-                  buttonCart(context, mapEntry.value[i], cartProvider)
+                  cartAddButton(context, cartProvider, mapEntry.value[i]),
                 ],
               )
             )
@@ -152,75 +155,6 @@ class HomeView extends StatelessWidget {
           ),
         const SizedBox(height: 30.0),
       ],
-    );
-  }
-
-  Widget buttonCart(BuildContext context, Product product, CartProvider cartProvider) {
-    if(cartProvider.products.containsKey(product)) {
-      return Row(
-        children: [
-          Expanded(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: errorColor,
-                fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0
-                ),
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              ),
-              onPressed: () => cartProvider.removeProduct(product),
-              child: Icon(
-                Icons.remove,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-          ),
-          const SizedBox(width: 10.0),
-          Expanded(
-            flex: 2,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: successColor,
-                fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
-                shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(4)),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0
-                ),
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              ),
-              onPressed: () => cartProvider.addProduct(product),
-              child: Icon(
-                Icons.add,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-          )
-        ],
-      );
-    }
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(4)),
-        ),
-        padding: const EdgeInsets.symmetric(
-          vertical: 8.0
-        ),
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      ),
-      onPressed: () => cartProvider.addProduct(product),
-      child: const Icon(
-        Icons.add_shopping_cart,
-        color: Color(0xff888888)
-      ),
     );
   }
 }

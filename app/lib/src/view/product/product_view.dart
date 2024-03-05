@@ -1,5 +1,7 @@
+import 'package:app/src/component/cartAddButton.dart';
 import 'package:app/src/const.dart';
 import 'package:app/src/entity/store.dart';
+import 'package:app/src/provider/cart_provider.dart';
 import 'package:app/src/provider/qr_code_provider.dart';
 import 'package:app/src/utils/formatPrice.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -13,6 +15,7 @@ class ProductView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QRCodeProvider qrCodeProvider = Provider.of<QRCodeProvider>(context);
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -37,6 +40,8 @@ class ProductView extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
                 child: CachedNetworkImage(
+                  memCacheWidth: 200,
+                  memCacheHeight: 200,
                   maxWidthDiskCache: 200,
                   maxHeightDiskCache: 200,
                   imageUrl: '$apiUrl/media/images/product/${qrCodeProvider.product!.id}/${qrCodeProvider.product!.images?[0]}',
@@ -47,6 +52,8 @@ class ProductView extends StatelessWidget {
             ),
             const SizedBox(height: 10.0),
             const Divider(),
+            const SizedBox(height: 10.0),
+            cartAddButton(context, cartProvider, qrCodeProvider.product!),
             const SizedBox(height: 10.0),
             Text(
               'Libellé',

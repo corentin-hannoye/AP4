@@ -5,46 +5,61 @@ class CartProvider extends ChangeNotifier {
 
   final Map<Product, int> _products = {};
   Map<Product, int> get products => _products;
-  void addProduct(Product product) {
-    if(_products.containsKey(product)) {
-      _products[product] = _products[product]! + 1;
-    } else {
-      _products[product] = 1;
-    }
-    productsCount();
-
-    notifyListeners();
-  }
-  void removeProduct(Product product) {
-    _products[product] = _products[product]! - 1;
-
-    if(_products[product]! <= 0) {
-      _products.remove(product);
-    }
-    productsCount();
-
-    notifyListeners();
-  }
-  void setProduct(Product product, int count) {
-    if(count == 0) {
-      _products.remove(product);
-    } else {
-      _products[product] = count;
-    }
-    productsCount();
-
-    notifyListeners();
-  }
 
   int _productCount = 0;
   int get productCount => _productCount;
 
-  void productsCount() {
-    if(_products.values.isEmpty) {
-      _productCount = 0;
+  // Method for add product in cart
+  void addProduct(Product product) {
+    Product? productFound = isAlreadyExist(product);
+
+    if(productFound == null) {
+      _products[product] = 1;
+    } else {
+      _products[productFound] = _products[productFound]! + 1;
+    }
+    updateProductsCount();
+  }
+
+  // Method for remove product in cart
+  void removeProduct(Product product) {
+    Product? productFound = isAlreadyExist(product);
+
+    if(productFound == null) {
       return;
     }
-    _productCount = _products.values.reduce((value, element) => value + element);
+    
+    _products[productFound] = _products[productFound]! - 1;
+
+    if(_products[productFound]! <= 0) {
+      _products.remove(productFound);
+    }
+    updateProductsCount();
+  }
+
+  // Method for set quantity product in cart
+  void setProduct(Product product, int count) {
+    Product? productFound = isAlreadyExist(product);
+
+    if(productFound == null) {
+      return;
+    }
+
+    if(count == 0) {
+      _products.remove(productFound);
+    } else {
+      _products[productFound] = count;
+    }
+    updateProductsCount();
+  }
+
+  void updateProductsCount() {
+    if(_products.values.isEmpty) {
+      _productCount = 0;
+    } else {
+      _productCount = _products.values.reduce((value, element) => value + element);
+    }
+    notifyListeners();
   }
 
   double getTotalPrice() {
@@ -55,5 +70,17 @@ class CartProvider extends ChangeNotifier {
     }
 
     return totalPrice;
+  }
+
+  Product? isAlreadyExist(Product product) {
+    if(_products.keys.isEmpty) {
+      return null;
+    }
+
+    try {
+      return _products.keys.singleWhere((element) => element.id == product.id);
+    } on StateError {
+      return null;
+    }
   }
 }

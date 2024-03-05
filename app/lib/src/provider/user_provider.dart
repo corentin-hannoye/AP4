@@ -1,10 +1,18 @@
 import 'package:app/src/entity/user.dart';
 import 'package:flutter/foundation.dart';
-// import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 class UserProvider extends ChangeNotifier {
-  bool _isLogin = true;
+
+  bool _isLogin = false;
   bool get isLogin => _isLogin;
+
+  User? session;
+
+  Placemark? _position;
+  Placemark? get position => _position;
+
   void toggleLogin(User? user) {
     if(user == null) {
       return;
@@ -16,24 +24,34 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  User? session;
-
   UserProvider() {
-    // getUserPosition();
+    getUserPosition();
   }
 
-  // Position? _position;
-  // Position? get position => _position;
+  void getUserPosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
 
-  // void getUserPosition() async {
-  //   bool serviceEnabled;
-  //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  //   if (!serviceEnabled) {
-  //     // Location services are not enabled don't continue
-  //     // accessing the position and request users of the 
-  //     // App to enable the location services.
-  //     return Future.error('Location services are disabled.');
-  //   }
-  //   _position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-  // }
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if(permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+  
+    if(permission == LocationPermission.deniedForever) {
+      return Future.error('Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    Position currentPos = await Geolocator.getCurrentPosition();
+
+    List<Placemark> placeMarks = await placemarkFromCoordinates(currentPos.latitude, currentPos.longitude);
+    _position = placeMarks[0];
+  }
 }
