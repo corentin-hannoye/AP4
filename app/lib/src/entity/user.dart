@@ -1,4 +1,5 @@
 class User {
+
   String? _id;
   String? _name;
   String? _firstname;
@@ -19,7 +20,18 @@ class User {
     _city = json['city'];
   }
 
-  String? get name {
-    return _name;
-  }
+  String? get name =>_name;
+
+  String? get id => _id;
+
+  String? get firstname => _firstname;
+
+  String? get phone => _phone;
+
+  String? get street => _street;
+
+  String? get zipCode => _zipCode;
+
+  String? get city => _city;
+
 }

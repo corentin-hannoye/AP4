@@ -1,4 +1,4 @@
-import 'package:app/src/component/cartAddButton.dart';
+import 'package:app/src/component/card_add_button.dart';
 import 'package:app/src/const.dart';
 import 'package:app/src/entity/store.dart';
 import 'package:app/src/provider/cart_provider.dart';
