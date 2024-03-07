@@ -21,7 +21,6 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-  
     UserProvider userProvider = Provider.of<UserProvider>(context);
     CartProvider cartProvider = Provider.of<CartProvider>(context);
 
@@ -37,7 +36,10 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
             setState(() {
               _selectedIndex = index;
             });
-            widget.statefulNavigationShell!.goBranch(index);
+            widget.statefulNavigationShell!.goBranch(
+              index,
+              initialLocation: index == _selectedIndex
+            );
           },
           iconSize: 30,
           activeColor: Theme.of(context).colorScheme.secondary,
@@ -84,5 +86,4 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
       ],
     );
   }
-
 }

@@ -1,7 +1,6 @@
 import 'package:app/src/const.dart';
 import 'package:app/src/entity/product.dart';
 import 'package:app/src/provider/cart_provider.dart';
-import 'package:app/src/provider/user_provider.dart';
 import 'package:app/src/utils/formatPrice.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,6 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider = Provider.of<UserProvider>(context);
     CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     return SingleChildScrollView(
@@ -29,7 +27,7 @@ class CartView extends StatelessWidget {
             if(cartProvider.productCount <= 0)
               const Text("Votre panier est vide, ajoutez-y des produits dès maintenant !")
             else
-              details(userProvider, cartProvider),
+              details(context, cartProvider),
               const SizedBox(height: 20.0),
               ...cartProvider.products.entries.map((entry) => card(cartProvider, entry))
           ],
@@ -38,13 +36,30 @@ class CartView extends StatelessWidget {
     );
   }
 
-  Widget details(UserProvider userProvider, CartProvider cartProvider) {
+  Widget details(BuildContext context, CartProvider cartProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text('Prix à payer : ${formatPrice(cartProvider.getTotalPrice())} pour ${cartProvider.productCount} produits'),
         const SizedBox(height: 20.0),
-        const Text('Magasin le plus proche : XXX')
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+            ),
+            padding: const EdgeInsets.symmetric(
+              vertical: 8.0
+            ),
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+          onPressed: () => print('passage de la commande'),
+          child: Text(
+            'Passer commande',
+            style: Theme.of(context).textTheme.bodyMedium,
+          )
+        )
       ],
     );
   }
