@@ -15,11 +15,12 @@
 > | [Git](https://git-scm.com/downloads "Git") | 2.44.0 |
 > | [Flutter](https://docs.flutter.dev/get-started/install "Flutter") | 3.19.1 |
 > | [Dart](https://dart.dev/get-dart "Dart") | 3.3.0 |
-> | [Android / API](https://apilevels.com/#main-table "Android / API") | 8 / 27 (> 90%) |
+> | [Android / API](https://apilevels.com/#main-table "Android / API") | 8 / 30 |
 > | [Java - JDK](https://www.oracle.com/fr/java/technologies/downloads/#java21 "Java - JDK") | 21.0.2 |
 > | [Gradle](https://docs.gradle.org/current/userguide/compatibility.html#java "Gradle") | 8.5 |
+> | [Kotlin](https://kotlinlang.org/docs/releases.html#release-details "Kotlin") | 1.9.23 |
 > | [Workbench](https://dev.mysql.com/downloads/installer/ "Workbench") | 8.0 |
-> | [MySQL](https://dev.mysql.com/downloads/installer/ "MySQL") | 8.0 |
+> | [MySQL Server](https://dev.mysql.com/downloads/installer/ "MySQL Server") | 8.0 |
 
 ## Bonnes pratiques
 
