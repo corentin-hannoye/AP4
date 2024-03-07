@@ -5,7 +5,7 @@ import 'package:geolocator/geolocator.dart';
 
 class UserProvider extends ChangeNotifier {
 
-  bool _isLogin = false;
+  bool _isLogin = true;
   bool get isLogin => _isLogin;
 
   User? session;

@@ -54,7 +54,7 @@ class ProductView extends StatelessWidget {
             const Divider(),
             const SizedBox(height: 10.0),
             cartAddButton(context, cartProvider, qrCodeProvider.product!),
-            const SizedBox(height: 10.0),
+            const SizedBox(height: 20.0),
             Text(
               'Libellé',
               style: Theme.of(context).textTheme.bodyLarge,

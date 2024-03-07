@@ -31,7 +31,7 @@ class QRCodeView extends StatelessWidget {
               formats: const <BarcodeFormat>[
                 BarcodeFormat.qrCode
               ],
-              resolutionPreset: QRCodeDartScanResolutionPreset.high,
+              resolutionPreset: QRCodeDartScanResolutionPreset.max,
               onCapture: (result) => qrCodeProvider.onCapture(context, result),
               child: QRScannerOverlay(),
             )
