@@ -1,4 +1,7 @@
 import 'package:app/src/entity/product.dart';
+import 'package:app/src/entity/store.dart';
+import 'package:app/src/provider/user_provider.dart';
+import 'package:app/src/repository/store_repository.dart';
 import 'package:flutter/material.dart';
 
 class CartProvider extends ChangeNotifier {
@@ -8,6 +11,10 @@ class CartProvider extends ChangeNotifier {
 
   int _productCount = 0;
   int get productCount => _productCount;
+
+  late final UserProvider _userProvider;
+
+  CartProvider(this._userProvider);
 
   // Method for add product in cart
   void addProduct(Product product) {
@@ -82,5 +89,13 @@ class CartProvider extends ChangeNotifier {
     } on StateError {
       return null;
     }
+  }
+
+  // find nearby user store, select stores
+  void findNearbyUserStore() async {
+    List<Store>? stores = await StoreRepository().findAll();
+
+    print(_userProvider.position?.latitude);
+    print(_userProvider.position?.longitude);
   }
 }

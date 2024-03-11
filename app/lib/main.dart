@@ -12,15 +12,18 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   await dotenv.load();
 
+  AppStateProvider appStateProvider = AppStateProvider();
+  UserProvider userProvider = UserProvider();
+
   runApp(
-     MultiProvider(
+    MultiProvider(
       providers: [
-        ChangeNotifierProvider<AppStateProvider>(create: (_) => AppStateProvider()),
-        ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
-        ChangeNotifierProvider<LoginValidationProvider>(create: (_) => LoginValidationProvider()),
+        ChangeNotifierProvider.value(value: appStateProvider),
+        ChangeNotifierProvider.value(value: userProvider),
+        ChangeNotifierProvider<LoginValidationProvider>(create: (_) => LoginValidationProvider(appStateProvider, userProvider)),
         ChangeNotifierProvider<ProductListProvider>(create: (_) => ProductListProvider()),
         ChangeNotifierProvider<QRCodeProvider>(create: (_) => QRCodeProvider()),
-        ChangeNotifierProvider<CartProvider>(create: (_) => CartProvider()),
+        ChangeNotifierProvider<CartProvider>(create: (_) => CartProvider(userProvider)),
       ],
       child: const App(),
     )

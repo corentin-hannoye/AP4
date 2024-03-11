@@ -15,14 +15,6 @@ class QRCodeView extends StatelessWidget {
     QRCodeProvider qrCodeProvider = Provider.of<QRCodeProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        title: Text(
-          'Scannez un QRCode',
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-        centerTitle: true,
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

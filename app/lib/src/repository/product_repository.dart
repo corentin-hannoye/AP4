@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class ProductRepository {
 
-  Future<Map<Category, List<Product>>?> getCategoriesAndArticles() async {
+  Future<Map<Category, List<Product>>?> findCategoriesAndArticles() async {
     final http.Response response = await http.get(Uri.parse('$apiUrl/api/categories-products'));
 
     if(response.statusCode != 200) {

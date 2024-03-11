@@ -19,7 +19,7 @@ class ProductListProvider extends ChangeNotifier {
   }
 
   void fetchCategoriesAndProducts() async {
-    _categoriesProducts = await ProductRepository().getCategoriesAndArticles();
+    _categoriesProducts = await ProductRepository().findCategoriesAndArticles();
     _categoriesProducts?.forEach((key, value) {
       if(value.length < productsPerPage) {
         _categoriesNbProductsDisplayed[key] = value.length;

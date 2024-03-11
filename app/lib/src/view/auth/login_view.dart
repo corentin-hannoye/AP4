@@ -90,7 +90,7 @@ class LoginView extends StatelessWidget {
                 const SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: loginValidationProvider.allowButton ? () {
-                    loginValidationProvider.sendForm(appStateProvider, userProvider);
+                    loginValidationProvider.sendForm();
                   } : null,
                   style: ElevatedButton.styleFrom(
                     textStyle: Theme.of(context).textTheme.bodyMedium,

@@ -17,9 +17,16 @@ class LoginValidationProvider extends ChangeNotifier {
     'email': Input(null, null),
     'password': Input(null, null),
   };
+
+  late final AppStateProvider _appStateProvider;
+  late final UserProvider _userProvider;
+
+  LoginValidationProvider(this._appStateProvider, this._userProvider);
+
   String? getValue(String inputName) {
     return _inputs[inputName]!.value;
   }
+
   void setValue(String inputName, String? value) {
     Input? input = _inputs[inputName];
     input!.value = value;
@@ -61,15 +68,15 @@ class LoginValidationProvider extends ChangeNotifier {
     _showPassword = false;
   }
 
-  void sendForm(AppStateProvider appStateProvider, UserProvider userProvider) async {
-    appStateProvider.toggleLoading();
+  void sendForm() async {
+    _appStateProvider.toggleLoading();
 
     String email = _inputs['email']!.value.toString();
     String password = _inputs['password']!.value.toString();
 
     User? user = await UserRepository().login(email, password);
 
-    appStateProvider.toggleLoading();
+    _appStateProvider.toggleLoading();
     _allowButton = false;
 
     if(user == null) {
@@ -79,7 +86,7 @@ class LoginValidationProvider extends ChangeNotifier {
     }
 
     reset();
-    userProvider.toggleLogin(user);
+    _userProvider.toggleLogin(user);
   }
 
 }

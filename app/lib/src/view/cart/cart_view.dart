@@ -13,6 +13,8 @@ class CartView extends StatelessWidget {
   Widget build(BuildContext context) {
     CartProvider cartProvider = Provider.of<CartProvider>(context);
 
+    Provider.of<CartProvider>(context, listen: false).findNearbyUserStore();
+
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.fromLTRB(10.0, 60.0, 10.0, 20.0),
