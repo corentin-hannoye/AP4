@@ -1,28 +1,21 @@
-# <div align="center">![Logo application de l'application All4Sport](/app/assets/images/logo_git.png) AP4 All4Sport</div>
+# <div align="center">![Logo application de l'application All4Sport](/app/assets/images/logo_git.png) AP4 ALL4SPORT</div>
 
-> [!IMPORTANT]  
-> [Lire la documentation d'utilisation](# "Lire la documentation d'utilisation")  
-> [Qui A Fait Quoi ?](# "Qui A Fait Quoi ?")  
+> [!IMPORTANT]
+> [Lire la documentation d'utilisation](# "Lire la documentation d'utilisation")<br>
+> [Qui A Fait Quoi ?](# "Qui A Fait Quoi ?")<br>
 > [Photos de l'app](# "Photos de l'app")
 
-> [!NOTE]  
-> [app](/app "app") - contient l'architecture de l'application ALL4SPORT  
-> [important](/important "important") - contient les fichiers de création, informations de l'application (mcd, maquette, doc, images, ...)
+> [!NOTE]
+> [app](/app "app") - contient l'architecture de l'application ALL4SPORT<br>
+> [important](/important "important") - contient les fichiers de création, information de l'application (mcd, maquette, doc, images, ...)
 
-> [!TIP]  
+> [!WARNING]
 > | Outil  | Version |
 > | ------------- | ------------- |
-> | [Git](https://git-scm.com/downloads "Git") | 2.44.0 |
-> | [Flutter](https://docs.flutter.dev/get-started/install "Flutter") | 3.19.1 |
-> | [Dart](https://dart.dev/get-dart "Dart") | 3.3.0 |
-> | [Android / API](https://apilevels.com/#main-table "Android / API") | 8 / 30 |
-> | [Java - JDK](https://www.oracle.com/fr/java/technologies/downloads/#java21 "Java - JDK") | 21.0.2 |
-> | [Gradle](https://docs.gradle.org/current/userguide/compatibility.html#java "Gradle") | 8.5 |
-> | [Kotlin](https://kotlinlang.org/docs/releases.html#release-details "Kotlin") | 1.9.23 |
-> | [Workbench](https://dev.mysql.com/downloads/installer/ "Workbench") | 8.0 |
-> | [MySQL Server](https://dev.mysql.com/downloads/installer/ "MySQL Server") | 8.0 |
+> | Workbench | 8.0 |
+> | MySQL (InnoDB) | 8.0.31 |
 
-## Bonnes pratiques
+Bonnes pratiques :
 
 - Nommage des branches : Veuillez nommer vos branches de la sorte (nom-pageQueTuTraites-ceQueTuFaisDessus).
 - Nommage des variables : Veuillez respecter la norme du camelCase.
