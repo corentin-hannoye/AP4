@@ -3,6 +3,7 @@ import 'package:app/pages/home/home_page.dart';
 import 'package:app/pages/profil/profil_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -11,7 +12,7 @@ Future<void> main() async {
 }
 
 const PRIMARY_COLOR = Color(0xff000000);
-const SECONDARY_COLOR = Color(0xfff7882d);
+const SECONDARY_COLOR = Color.fromARGB(255, 34, 21, 11);
 const WHITE_COLOR = Color(0xffffffff);
 const SUCCESS_COLOR = Color(0xff3fbf4f);
 const ERROR_COLOR = Color(0xffe84f4f);
@@ -38,24 +39,23 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'A4S',
-      debugShowCheckedModeBanner: false,
-      theme: appThemeData(),
-      home: SafeArea(
-        child: DefaultTabController(
+        title: 'A4S',
+        debugShowCheckedModeBanner: false,
+        theme: appThemeData(),
+        home: SafeArea(
+            child: DefaultTabController(
           length: 3,
           child: Scaffold(
             appBar: (isConnected ? appTopBar() : null),
             body: getScreens(),
-            bottomNavigationBar: (isConnected ? appBottomNavigationBar() : null),
+            bottomNavigationBar:
+                (isConnected ? appBottomNavigationBar() : null),
           ),
-        )
-      )
-    );
+        )));
   }
 
   getScreens() {
-    if(!isConnected) {
+    if (!isConnected) {
       return LoginPage(toggleConnected: toggleConnected);
     }
 
@@ -68,23 +68,21 @@ class _MainAppState extends State<MainApp> {
     );
   }
 
+  void goQrCode() {
+    print('test');
+  }
+
   // AppBar
   AppBar appTopBar() {
     return AppBar(
-      title: Image.asset(
-        'assets/images/logo.png',
-        width: 50
-      ),
+      title: Image.asset('assets/images/logo.png', width: 50),
       actions: <Widget>[
         TextButton(
-          onPressed: () {
-            print('QR CODE...');
-          },
-          child: const Icon(
-            Icons.qr_code_scanner,
-            color: WHITE_COLOR
-          )
-        )
+            onPressed: () {
+              print('QR CODE...');
+              goQrCode();
+            },
+            child: const Icon(Icons.qr_code_scanner, color: WHITE_COLOR))
       ],
       scrolledUnderElevation: 0,
       backgroundColor: PRIMARY_COLOR,
@@ -122,43 +120,25 @@ class _MainAppState extends State<MainApp> {
   // ThemeApp
   ThemeData appThemeData() {
     return ThemeData(
-      fontFamily: 'Montserrat',
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: PRIMARY_COLOR,
-        primary: PRIMARY_COLOR,
-        onPrimary: WHITE_COLOR,
-        secondary: SECONDARY_COLOR,
-        error: ERROR_COLOR
-      ),
-      disabledColor: DISABLED_COLOR,
-      textTheme: const TextTheme(
-        displayLarge: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.w900
-        ),
-        displayMedium: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.normal
-        ),
-        bodyLarge: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w900
-        ),
-        bodyMedium: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.normal
-        ),
-        labelLarge: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w900
-        ),
-        labelSmall: TextStyle(
-          fontSize: 16,
-          decoration: TextDecoration.underline,
-          decorationColor: LINK_COLOR,
-          color: LINK_COLOR
-        )
-      )
-    );
+        fontFamily: 'Montserrat',
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: PRIMARY_COLOR,
+            primary: PRIMARY_COLOR,
+            onPrimary: WHITE_COLOR,
+            secondary: SECONDARY_COLOR,
+            error: ERROR_COLOR),
+        disabledColor: DISABLED_COLOR,
+        textTheme: const TextTheme(
+            displayLarge: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+            displayMedium:
+                TextStyle(fontSize: 30, fontWeight: FontWeight.normal),
+            bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
+            bodyMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+            labelLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
+            labelSmall: TextStyle(
+                fontSize: 16,
+                decoration: TextDecoration.underline,
+                decorationColor: LINK_COLOR,
+                color: LINK_COLOR)));
   }
 }
