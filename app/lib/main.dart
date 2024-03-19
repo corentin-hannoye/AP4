@@ -3,12 +3,12 @@ import 'package:app/pages/home/home_page.dart';
 import 'package:app/pages/profil/profil_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:qr_code_dart_scan/qr_code_dart_scan.dart'; // Import the correct library
 
 Future<void> main() async {
   await dotenv.load();
 
-  runApp(const MainApp());
+  runApp(MaterialApp(home: const MainApp())); // Wrap with MaterialApp
 }
 
 const PRIMARY_COLOR = Color(0xff000000);
@@ -39,19 +39,19 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'A4S',
-        debugShowCheckedModeBanner: false,
-        theme: appThemeData(),
-        home: SafeArea(
-            child: DefaultTabController(
-          length: 3,
-          child: Scaffold(
-            appBar: (isConnected ? appTopBar() : null),
-            body: getScreens(),
-            bottomNavigationBar:
-                (isConnected ? appBottomNavigationBar() : null),
-          ),
-        )));
+      title: 'A4S',
+      debugShowCheckedModeBanner: false,
+      theme: appThemeData(),
+      home: SafeArea(
+          child: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: (isConnected ? appTopBar() : null),
+          body: getScreens(),
+          bottomNavigationBar: (isConnected ? appBottomNavigationBar() : null),
+        ),
+      )),
+    );
   }
 
   getScreens() {
@@ -68,9 +68,20 @@ class _MainAppState extends State<MainApp> {
     );
   }
 
-  void goQrCode() {
-    print('test');
+  void goQrCode() async {
+    // Use QrCodeDartScan instead of QRView
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const QRCodeDartScanView()),
+    );
+
+    if (result != null) {
+      print('QR Code Data: $result'); // Access scanned data here
+      // Perform actions based on the scanned data
+    }
   }
+
+  // QR code scanner variables and methods are removed (replaced by goQrCode)
 
   // AppBar
   AppBar appTopBar() {
@@ -78,11 +89,12 @@ class _MainAppState extends State<MainApp> {
       title: Image.asset('assets/images/logo.png', width: 50),
       actions: <Widget>[
         TextButton(
-            onPressed: () {
-              print('QR CODE...');
-              goQrCode();
-            },
-            child: const Icon(Icons.qr_code_scanner, color: WHITE_COLOR))
+          onPressed: () {
+            print('QR CODE...');
+            goQrCode();
+          },
+          child: const Icon(Icons.qr_code_scanner, color: WHITE_COLOR),
+        ),
       ],
       scrolledUnderElevation: 0,
       backgroundColor: PRIMARY_COLOR,
