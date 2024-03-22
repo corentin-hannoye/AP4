@@ -12,6 +12,12 @@ class Store {
   int? _quantity;
   int? get quantity => _quantity;
 
+  double? _latitude;
+  double? get latitude => _latitude;
+
+  double? _longitude;
+  double? get longitude => _longitude;
+
   Store(this._id, this._city, this._country, this._quantity);
 
   Store.fromJson(Map json) {
@@ -21,6 +27,8 @@ class Store {
       _id = json['id'];
       _city = json['city'];
       _country = json['country'];
+      _latitude = json['latitude'];
+      _longitude = json['longitude'];
 
     } else {
 

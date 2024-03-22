@@ -3,6 +3,7 @@ import 'package:app/src/entity/store.dart';
 import 'package:app/src/provider/user_provider.dart';
 import 'package:app/src/repository/store_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 class CartProvider extends ChangeNotifier {
 
@@ -15,8 +16,12 @@ class CartProvider extends ChangeNotifier {
   late final UserProvider? _userProvider;
   UserProvider? get userProvider => _userProvider;
 
-  List<Store> _userStores = [];
-  List<Store> get userStores => _userStores;
+  int? chosenStoreId;
+
+  Map<Store, double> _userStores = {};
+  Map<Store, double> get userStores => _userStores;
+
+  bool loadingUserStores = false;
 
   CartProvider(this._userProvider);
 
@@ -87,19 +92,62 @@ class CartProvider extends ChangeNotifier {
     if(_products.keys.isEmpty) {
       return null;
     }
-
-    try {
-      return _products.keys.singleWhere((element) => element.id == product.id);
-    } on StateError {
+    
+    if(_products.keys.isEmpty) {
       return null;
     }
+
+    for(Product p in _products.keys) {
+      if(p.id == product.id) {
+        return p;
+      }
+    }
+    return null;
   }
 
   // find nearby user store, select stores
   void findUserStore() async {
-    List<Store>? stores = await StoreRepository().findAll();
+    if(!loadingUserStores) {
+      loadingUserStores = true;
 
-    _userStores = stores!;
-    notifyListeners();
+      List<Store>? stores = await StoreRepository().findAll();
+
+      if(stores == null) {
+        return;
+      }
+
+      double? userLatitude;
+      double? userLongitude;
+
+      if(_userProvider?.position != null) {
+        userLatitude = _userProvider!.position!.latitude;
+        userLongitude = _userProvider.position!.longitude;
+      }
+
+      for(Store store in stores) {
+
+        if(userLatitude != null && userLongitude != null) {
+          double distance = Geolocator.distanceBetween(userLatitude, userLongitude, store.latitude!, store.longitude!);
+        
+          _userStores[store] = distance;
+          continue;
+        }
+        _userStores[store] = 0;
+
+      }
+
+      if(userLatitude != null && userLongitude != null) {
+        List<MapEntry<Store, double>> list = _userStores.entries.toList();
+        list.sort((a, b) => a.value.compareTo(b.value));
+        _userStores = Map.fromEntries(list);
+      }
+
+      loadingUserStores = false;
+      notifyListeners();
+    }
+  }
+
+  void sendForm() {
+    print('passage de la commande dans le magasin $chosenStoreId...');
   }
 }

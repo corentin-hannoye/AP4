@@ -83,7 +83,7 @@ class ProductView extends StatelessWidget {
             ),
             const SizedBox(height: 20.0),
             Text(
-              'Disponibilité',
+              'Disponibilité magasin',
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             const SizedBox(height: 10.0),

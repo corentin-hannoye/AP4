@@ -57,12 +57,12 @@ class CartView extends StatelessWidget {
         const SizedBox(height: 10.0),
         const Text('Choisissez votre magasin All4Sport dans lequel vous souhaitez récupérer votre commande'),
         const SizedBox(height: 20.0),
-        const Text('Le plus proche de chez vous : All4Sport Lille'),
+        Text('Le plus proche de chez vous : ${cartProvider.userStores.values.every((el) => el == 0) ? 'Non disponible' : cartProvider.userStores.keys.first.city}'),
         const SizedBox(height: 20.0),
         DropdownMenu<int>(
           key: GlobalKey(),
           initialSelection: 0,
-          onSelected: (value) => print('choix $value'),
+          onSelected: (value) => cartProvider.chosenStoreId = value,
           textStyle: Theme.of(context).textTheme.bodyMedium,
           expandedInsets: EdgeInsets.zero,
           label: Text(
@@ -78,10 +78,11 @@ class CartView extends StatelessWidget {
               height: 50.0
             ),
           ),
-          dropdownMenuEntries: cartProvider.userStores.map((e) =>
+          dropdownMenuEntries: cartProvider.userStores.entries.map((e) =>
             DropdownMenuEntry(
-              label: e.city!,
-              value: e.id!,
+              labelWidget: Text('${e.key.city!} ${e.value == 0 ? '' : '- ${(e.value / 1000).toStringAsFixed(0)} kms'}'),
+              label: e.key.city!,
+              value: e.key.id!,
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.bodyMedium
               ),
@@ -101,7 +102,7 @@ class CartView extends StatelessWidget {
             ),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
-          onPressed: () => print('passage de la commande'),
+          onPressed: () => cartProvider.sendForm(),
           child: Text(
             'Passer commande',
             style: Theme.of(context).textTheme.bodyMedium,
