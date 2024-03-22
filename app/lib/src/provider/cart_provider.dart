@@ -12,7 +12,11 @@ class CartProvider extends ChangeNotifier {
   int _productCount = 0;
   int get productCount => _productCount;
 
-  late final UserProvider _userProvider;
+  late final UserProvider? _userProvider;
+  UserProvider? get userProvider => _userProvider;
+
+  List<Store> _userStores = [];
+  List<Store> get userStores => _userStores;
 
   CartProvider(this._userProvider);
 
@@ -92,10 +96,10 @@ class CartProvider extends ChangeNotifier {
   }
 
   // find nearby user store, select stores
-  void findNearbyUserStore() async {
+  void findUserStore() async {
     List<Store>? stores = await StoreRepository().findAll();
 
-    print(_userProvider.position?.latitude);
-    print(_userProvider.position?.longitude);
+    _userStores = stores!;
+    notifyListeners();
   }
 }

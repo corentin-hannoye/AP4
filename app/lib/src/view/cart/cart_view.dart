@@ -13,7 +13,9 @@ class CartView extends StatelessWidget {
   Widget build(BuildContext context) {
     CartProvider cartProvider = Provider.of<CartProvider>(context);
 
-    Provider.of<CartProvider>(context, listen: false).findNearbyUserStore();
+    if(cartProvider.userStores.isEmpty) {
+      cartProvider.findUserStore();
+    }
 
     return SingleChildScrollView(
       child: Container(
@@ -76,17 +78,15 @@ class CartView extends StatelessWidget {
               height: 50.0
             ),
           ),
-          dropdownMenuEntries: [
-            ...[1, 2, 3].map((e) =>
-              DropdownMenuEntry(
-                label: 'Magasin $e',
-                value: e,
-                style: TextButton.styleFrom(
-                  textStyle: Theme.of(context).textTheme.bodyMedium
-                ),
-              )
+          dropdownMenuEntries: cartProvider.userStores.map((e) =>
+            DropdownMenuEntry(
+              label: e.city!,
+              value: e.id!,
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.bodyMedium
+              ),
             )
-          ],
+          ).toList()
         ),
         const SizedBox(height: 20.0),
         ElevatedButton(
