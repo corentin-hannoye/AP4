@@ -148,6 +148,10 @@ class CartProvider extends ChangeNotifier {
   }
 
   void sendForm() {
-    print('passage de la commande dans le magasin $chosenStoreId...');
+    if(chosenStoreId == null) {
+      return;
+    }
+
+    print('passage de la commande...');
   }
 }
