@@ -30,4 +30,4 @@
 - Nommage des fonctions : Veuillez être le plus clair et précis possible dans le nommage (la longueur n'est pas un problème).
 - Maintenabilité du code : Modularisez au maximum le code écrit et le factoriser avant tout push/merge.
 - Compréhension du code : Ne pas hésiter à insérer des commentaires dans les fichiers.
-- Cohésion : Prévenir l'équipe avant et après chaque push/merge.
+- Cohésion d'équipe : Prévenir l'équipe avant et après chaque push/merge.
